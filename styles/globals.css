@@ -32,3 +32,8 @@ body {
   justify-content: center;
   align-items: center;
 }
+
+.dot {
+  font-size: 20px;
+  font-weight: bold;
+}

@@ -1,26 +1,41 @@
-import UpperNav from "@/components/common/upper-nav";
-import {
-  Button,
-  Card,
-  CardActions,
-  CardContent,
-  Container,
-} from "@mui/material";
-import React from "react";
+"use client";
 
-function page() {
+import UpperNav from "@/components/common/upper-nav";
+import ListTable from "@/components/products/list-table";
+import AddIcon from "@mui/icons-material/Add";
+import { Box, Button, Container } from "@mui/material";
+import Link from "next/link";
+import React from "react";
+import { useTranslation } from "react-i18next";
+
+function Page() {
+  const { t } = useTranslation();
   return (
-    <Container className="">
-      <Card>
-        <CardContent>
-          <h1>Products</h1>
-        </CardContent>
-        <CardActions>
-          <Button>Click here</Button>
-        </CardActions>
-      </Card>
+    <Container className="mt-12">
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          gap: 1,
+          paddingTop: 7,
+          justifyContent: "space-between",
+        }}>
+        <div>
+          <div className="text-3xl font-bold">{t("PRODUCTS")}</div>
+          <div>
+            {t("DASHBOARD")} <span className="dot">.</span> {t("PRODUCTS")}{" "}
+            <span className="dot">.</span> {t("LIST")}
+          </div>
+        </div>
+        <Link href="/products/create">
+          <Button size="large" startIcon={<AddIcon />}>
+            {t("ADD")}
+          </Button>
+        </Link>
+      </Box>
+      <ListTable />
     </Container>
   );
 }
 
-export default page;
+export default Page;

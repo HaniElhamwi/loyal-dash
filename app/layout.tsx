@@ -49,7 +49,28 @@ export const theme = createTheme({
         },
       },
     },
+    MuiTextField: {
+      styleOverrides: {
+        root: {
+          backgroundColor: "white",
+          color: "white",
+          borderRadius: "10px",
+          "&:hover": {
+            backgroundColor: "#eee",
+            border: "1px #eee solid",
+          },
+          "& .MuiOutlinedInput-root": {
+            "&.Mui-focused fieldset": {
+              backgroundColor: "",
+              border: "3px #6366F1 solid",
+              transition: "0.4s all",
+            },
+          },
+        },
+      },
+    },
   },
+
   palette: {
     primary: {
       main: "#90caf9",
