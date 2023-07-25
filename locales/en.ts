@@ -13,4 +13,6 @@ export const en = {
   IMAGES_DESC: "Images will appear in the store front of your website.",
   CLICK_TO_UPLOAD: "Click to upload image",
   CATEGORY: "Category",
+  CATEGORIES: "Categories",
+  ADD_CATEGORY: "Add Category",
 };

@@ -9,7 +9,7 @@ function Nav() {
   return (
     <div className=" text-primary w-[300px] bg-primary min-h-screen py-12 px-5">
       <div className="text-center flex_center">
-        <Image src="/images/logo.jpg" alt="" width={100} height={100} />
+        <Image src="/images/logo.png" alt="" width={100} height={100} />
       </div>
       <div className="mt-4">
         <h5 className="text-md text-gray-400 font-medium ">{t("CONCEPTS")}</h5>
