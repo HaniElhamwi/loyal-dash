@@ -16,4 +16,6 @@ export const en = {
   CATEGORIES: "Categories",
   ADD_CATEGORY: "Add Category",
   LOGIN: "Log in",
+  DISCARD: "Discard",
+  ADD_PRODUCTS: "Add Products",
 };

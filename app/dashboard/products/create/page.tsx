@@ -3,7 +3,7 @@
 import BasicDetails from "@/components/products/create/basic-details";
 import PickCategory from "@/components/products/create/pick-category";
 import PickImage from "@/components/products/create/pick-image";
-import { Box, Button, Container, Link } from "@mui/material";
+import { Box, Button, Card, CardActions, Container, Link } from "@mui/material";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
@@ -30,6 +30,23 @@ function Page() {
       <BasicDetails />
       <PickImage />
       <PickCategory />
+
+      <CardActions className="mt-4 flex gap-3" dir="rtl">
+        <Button size="large">{t("ADD_PRODUCTS")}</Button>
+        <Button
+          size="large"
+          variant="outlined"
+          sx={{
+            background: "transparent !important",
+            color: "#6366F1",
+            border: "1px solid #6366F1",
+            "&:hover": {
+              color: "white",
+            },
+          }}>
+          {t("DISCARD")}
+        </Button>
+      </CardActions>
     </Container>
   );
 }

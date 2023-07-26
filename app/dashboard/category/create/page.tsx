@@ -2,12 +2,14 @@
 
 import BasicDetails from "@/components/products/create/basic-details";
 import PickImage from "@/components/products/create/pick-image";
+import useAddCategory from "@/hooks/categories/useAddDocument";
 import { Box, Container } from "@mui/material";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
 function Page() {
   const { t } = useTranslation();
+  const { addCategory } = useAddCategory();
   return (
     <div>
       <Container sx={{ marginTop: 12 }}>
@@ -28,7 +30,7 @@ function Page() {
           </div>
         </Box>
         <BasicDetails />
-        <PickImage />
+        {/* <PickImage /> */}
       </Container>
     </div>
   );

@@ -2,13 +2,14 @@
 
 import CategoryList from "@/components/categories/category-list";
 import { Box, Button, Container } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import AddIcon from "@mui/icons-material/Add";
 import { useTranslation } from "react-i18next";
 import Link from "next/link";
 
 function Page() {
   const { t } = useTranslation();
+
   return (
     <Container className="mt-12">
       <Box

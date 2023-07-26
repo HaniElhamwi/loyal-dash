@@ -1,9 +1,10 @@
+import { auth } from "@/firebase";
 import { getAuth, signOut } from "firebase/auth";
 import { useRouter } from "next/navigation";
 
 function useSignout() {
   const router = useRouter();
-  const auth = getAuth();
+
   const signout = () => {
     signOut(auth)
       .then(() => {
