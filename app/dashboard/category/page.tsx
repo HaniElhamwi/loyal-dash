@@ -1,12 +1,11 @@
 "use client";
 
-import UpperNav from "@/components/common/upper-nav";
-import ListTable from "@/components/products/list-table";
-import AddIcon from "@mui/icons-material/Add";
+import CategoryList from "@/components/categories/category-list";
 import { Box, Button, Container } from "@mui/material";
-import Link from "next/link";
 import React from "react";
+import AddIcon from "@mui/icons-material/Add";
 import { useTranslation } from "react-i18next";
+import Link from "next/link";
 
 function Page() {
   const { t } = useTranslation();
@@ -21,19 +20,19 @@ function Page() {
           justifyContent: "space-between",
         }}>
         <div>
-          <div className="text-3xl font-bold">{t("PRODUCTS")}</div>
+          <div className="text-3xl font-bold">{t("CATEGORIES")}</div>
           <div>
-            {t("DASHBOARD")} <span className="dot">.</span> {t("PRODUCTS")}{" "}
+            {t("DASHBOARD")} <span className="dot">.</span> {t("CATEGORIES")}{" "}
             <span className="dot">.</span> {t("LIST")}
           </div>
         </div>
-        <Link href="/products/create">
+        <Link href="/dashboard/category/create">
           <Button size="large" startIcon={<AddIcon />}>
             {t("ADD")}
           </Button>
         </Link>
       </Box>
-      <ListTable />
+      <CategoryList />
     </Container>
   );
 }

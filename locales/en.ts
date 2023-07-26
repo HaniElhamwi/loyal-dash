@@ -15,4 +15,5 @@ export const en = {
   CATEGORY: "Category",
   CATEGORIES: "Categories",
   ADD_CATEGORY: "Add Category",
+  LOGIN: "Log in",
 };

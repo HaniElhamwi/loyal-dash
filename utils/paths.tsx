@@ -16,7 +16,7 @@ export const navItems = [
   },
   {
     title: "PRODUCTS",
-    url: "/products",
+    url: "/dashboard/products",
     icon: (
       <ShoppingBagIcon
         className={` text-[24px]`}
@@ -29,12 +29,12 @@ export const navItems = [
       {
         id: 3,
         title: "LIST",
-        url: "/products",
+        url: "/dashboard/products",
       },
       {
         id: 4,
         title: "CREATE",
-        url: "/products/create",
+        url: "/dashboard/products/create",
       },
     ],
   },
@@ -52,12 +52,12 @@ export const navItems = [
       {
         id: 3,
         title: "LIST",
-        url: "/category",
+        url: "/dashboard/category",
       },
       {
         id: 4,
         title: "CREATE",
-        url: "/category/create",
+        url: "/dashboard/category/create",
       },
     ],
   },
