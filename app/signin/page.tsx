@@ -46,6 +46,14 @@ function Page() {
         <Card className="min-w-[500px]">
           <CardContent>
             <form onSubmit={onSignin}>
+              <div className="flex_center">
+                <img
+                  src="/images/logo.png"
+                  className="w-[140px] h-[140px] "
+                  alt=""
+                />
+              </div>
+
               <h1 className="mb-4 text-xl font-bold">{t("LOGIN")}</h1>
               <div className="flex gap-2 flex-col">
                 <TextField

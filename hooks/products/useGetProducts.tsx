@@ -1,25 +1,25 @@
 import { db } from "@/firebase";
-import { collection, query, getDocs } from "firebase/firestore";
+import { collection, query, where, getDocs } from "firebase/firestore";
 import { useState } from "react";
 
-const useGetAllCategories = () => {
+const useGetAllProducts = () => {
   const [loading, setLoading] = useState(false);
-  const [categories, setCategories] = useState([]);
+  const [products, setProducts] = useState([]);
   const [message, setMessage] = useState({
     message: "",
     status: "",
   });
-  const categoriesPicker: any = [];
-
-  const getCategories = async () => {
+  const productsData: any = [];
+  const getAllProducts = async () => {
     try {
       setLoading(true);
       const q = query(collection(db, "categories"));
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
-        categoriesPicker.push(doc.id);
+        productsData.push(doc.data());
       });
-      setCategories(categoriesPicker);
+      console.log(productsData);
+      setProducts(productsData);
       setLoading(false);
     } catch (err: any) {
       setMessage({
@@ -31,12 +31,12 @@ const useGetAllCategories = () => {
   };
 
   return {
-    getCategories,
+    getAllProducts,
     loading,
     setMessage,
     message,
-    categories,
+    products,
   };
 };
 
-export default useGetAllCategories;
+export default useGetAllProducts;

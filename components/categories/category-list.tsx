@@ -63,17 +63,13 @@ const USERS = [
 
 function CategoryList() {
   const [editTableNumber, setEditTableNumber] = useState(-1);
-  const [categoriesData, setCategoriesData] = useState<string[]>([]);
   const { t } = useTranslation();
   const { categories, getCategories, loading, message } = useGetAllCategories();
 
   useEffect(() => {
-    const getCat = async () => {
-      await getCategories();
-      setCategoriesData(categories);
-    };
-    getCat();
+    getCategories();
   }, []);
+  console.log(categories);
   return (
     <div>
       <Card className="mt-12" sx={{ background: "white", minWidth: 800 }}>
@@ -104,7 +100,7 @@ function CategoryList() {
               </TableHead>
               <TableBody>
                 {/* */}
-                {categoriesData.map((row, i) => (
+                {categories.map((row, i) => (
                   <>
                     <TableRowStyles key={row}>
                       <TableCell style={{ width: "10%" }}>

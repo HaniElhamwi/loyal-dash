@@ -13,7 +13,6 @@ function useSignin() {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
-        console.log(user);
         router.push("/dashboard");
         setLoading(false);
       })

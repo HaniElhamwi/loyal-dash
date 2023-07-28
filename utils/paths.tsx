@@ -1,5 +1,6 @@
 import HomeIcon from "@mui/icons-material/Home";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
+import GroupIcon from "@mui/icons-material/Group";
 import CategoryIcon from "@mui/icons-material/Category";
 
 export const navItems = [
@@ -60,5 +61,16 @@ export const navItems = [
         url: "/dashboard/category/create",
       },
     ],
+  },
+  {
+    title: "USERS",
+    url: "/dashboard/users",
+    icon: (
+      <GroupIcon
+        className="text-gray-400 text-[24px]"
+        style={{ color: "inherit" }}
+      />
+    ),
+    id: 5,
   },
 ];

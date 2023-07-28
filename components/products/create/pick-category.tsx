@@ -1,3 +1,4 @@
+import useGetAllCategories from "@/hooks/categories/useGetCategories";
 import { TextFieldsTwoTone } from "@mui/icons-material";
 import {
   Card,
@@ -8,11 +9,33 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-function PickCategory() {
+interface IFormikProps {
+  handleChange: any;
+  errors: any;
+  touched: any;
+  values: any;
+  loading: boolean;
+}
+
+function PickCategory(props: IFormikProps) {
   const { t } = useTranslation();
+  const {
+    errors,
+    handleChange,
+    touched,
+    values,
+    loading: uploadLoading,
+  } = props;
+  const { categories, getCategories, loading, message, setMessage } =
+    useGetAllCategories();
+
+  useEffect(() => {
+    getCategories();
+  }, []);
+
   return (
     <Card sx={{ background: "white", marginTop: 5, padding: 2 }}>
       <CardContent>
@@ -30,10 +53,28 @@ function PickCategory() {
               InputLabelProps={{
                 style: { color: "black" },
               }}
+              SelectProps={{
+                style: { color: "black" },
+              }}
+              disabled={uploadLoading}
+              name="category"
+              value={values.category}
+              error={Boolean(errors.category) && touched.category}
+              onChange={handleChange}
+              helperText={touched.category && errors.category}
+              inputProps={{ style: { color: "black" } }}
               select>
-              <MenuItem>category 1</MenuItem>
-              <MenuItem>category 2</MenuItem>
-              <MenuItem>category 3</MenuItem>
+              {categories.map((item: string) => {
+                return (
+                  <MenuItem
+                    color="black"
+                    key={item}
+                    value={item}
+                    sx={{ color: "white" }}>
+                    {item}
+                  </MenuItem>
+                );
+              })}
             </TextField>
           </Grid>
         </Grid>

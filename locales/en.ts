@@ -18,4 +18,7 @@ export const en = {
   LOGIN: "Log in",
   DISCARD: "Discard",
   ADD_PRODUCTS: "Add Products",
+  CREATE: "Create",
+  USERS: "Users",
+  CANCEL: "Cancel",
 };

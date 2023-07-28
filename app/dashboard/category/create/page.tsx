@@ -1,6 +1,6 @@
 "use client";
 
-import BasicDetails from "@/components/products/create/basic-details";
+import BasicDetails from "@/components/categories/create/basic-details";
 import PickImage from "@/components/products/create/pick-image";
 import useAddCategory from "@/hooks/categories/useAddDocument";
 import { Box, Container } from "@mui/material";

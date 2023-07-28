@@ -9,13 +9,18 @@ import {
 import React, { useState, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import UploadIcon from "@mui/icons-material/Upload";
-import Image from "next/image";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-function PickImage({ setFieldValue }: { setFieldValue: any }) {
-  const [selectedImage, setSelectedImage] = useState<string>("");
+function DialogPickImage({
+  setFieldValue,
+  image,
+}: {
+  setFieldValue: any;
+  image: string;
+}) {
+  const [selectedImage, setSelectedImage] = useState<string>(image);
   const fileInputRef: any = useRef(null);
-
+  console.log(image);
   // Function to handle image selection
   const handleImageChange = (event: any) => {
     const file = event.target.files[0];
@@ -29,19 +34,11 @@ function PickImage({ setFieldValue }: { setFieldValue: any }) {
   const { t } = useTranslation();
   return (
     <Card
-      sx={{ background: "white", marginTop: 5, padding: 2 }}
+      sx={{ background: "white", marginTop: 1, padding: 2 }}
       className="select-none">
       <CardContent>
         <Grid container spacing={3}>
-          <Grid item xs={12} sm={4}>
-            <div color="#333" className="font-bold mt-3 text-[#333]">
-              {t("IMAGES")}
-            </div>
-            <div color="#333" className="mb-2 text-md font-medium text-[#999]">
-              {t("IMAGES_DESC")}
-            </div>
-          </Grid>
-          <Grid item xs={12} sm={8}>
+          <Grid item xs={12} sm={12}>
             <Box
               sx={{
                 border: "2px dotted #999",
@@ -76,11 +73,9 @@ function PickImage({ setFieldValue }: { setFieldValue: any }) {
                   flexDirection="row"
                   alignItems="center"
                   justifyContent="space-around">
-                  <Image
+                  <img
                     src={selectedImage}
                     alt=""
-                    width={100}
-                    height={100}
                     className="w-[100px] h-[100px]"
                   />
                   <DeleteIcon
@@ -102,4 +97,4 @@ function PickImage({ setFieldValue }: { setFieldValue: any }) {
   );
 }
 
-export default PickImage;
+export default DialogPickImage;
