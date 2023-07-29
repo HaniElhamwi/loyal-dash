@@ -10,13 +10,16 @@ interface IDeleteProductProps {
 
 function useDeleteProduct() {
   const [loading, setLoading] = useState<boolean>(false);
-
+  const [message, setMessage] = useState({
+    message: "",
+    status: "",
+  });
   const deleteProduct = async ({ category }: IDeleteProductProps) => {
     try {
       setLoading(true);
       await deleteDoc(doc(db, "categories", category));
-      toast("Category deleted successfully");
       setLoading(false);
+      toast("Category deleted successfully");
     } catch {
       setLoading(false);
       toast("some thing went wrong");
@@ -25,6 +28,8 @@ function useDeleteProduct() {
   return {
     deleteProduct,
     loading,
+    setMessage,
+    message,
   };
 }
 

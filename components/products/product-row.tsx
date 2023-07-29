@@ -54,12 +54,13 @@ function ProductRow({
   const [openEditDialog, setOpenEditDialog] = useState(false);
   const [rowItem, setRowItem] = useState(row);
 
-  const { deleteProduct, loading, message, setMessage } = useDeleteProduct();
+  const { deleteProduct, loading } = useDeleteProduct();
 
   const deleteProductHandler = async () => {
     const newProducts = item.products.filter(
       (pro: { id: number }) => pro.id !== row.id
     );
+    console.log(newProducts);
     try {
       await deleteProduct({ category: item.title, products: newProducts });
       handleDeleteProduct(row.id);
