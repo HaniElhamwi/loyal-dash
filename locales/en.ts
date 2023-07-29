@@ -21,4 +21,6 @@ export const en = {
   CREATE: "Create",
   USERS: "Users",
   CANCEL: "Cancel",
+  DELETE_PRODUCT_ANNOUNCEMENT:
+    "Are you sure that you want to delete this product",
 };

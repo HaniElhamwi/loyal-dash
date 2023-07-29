@@ -1,5 +1,6 @@
 import {
   Button,
+  CircularProgress,
   Dialog,
   DialogActions,
   DialogContent,
@@ -40,6 +41,10 @@ function EditProductDialog({
   products,
   item,
   id,
+  setProducts,
+  prodIndex,
+  itemIndex,
+  setRowItem,
 }: {
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
@@ -52,6 +57,10 @@ function EditProductDialog({
   id: string;
   item: any;
   products: any;
+  setProducts: any;
+  itemIndex: number;
+  setRowItem: any;
+  prodIndex: number;
 }) {
   const { t } = useTranslation();
 
@@ -88,14 +97,7 @@ function EditProductDialog({
             }}
             onSubmit={async (values, { resetForm }) => {
               try {
-                // await addProducts({
-                //   category: values.category,
-                //   desc: values.desc,
-                //   image: values.image,
-                //   title: values.title,
-                // });
-                console.log(values);
-                editProduct({
+                const { imageData } = await editProduct({
                   title: values.title,
                   desc: values.desc,
                   image: values.image,
@@ -103,7 +105,15 @@ function EditProductDialog({
                   oldImage: prod.image,
                   id,
                 });
-                resetForm();
+                console.log(imageData);
+                // resetForm();
+                setRowItem({
+                  title: values.title,
+                  desc: values.desc,
+                  image: imageData,
+                  category: values.category,
+                });
+                setOpen(false);
               } catch {}
             }}
             validationSchema={DisplayingErrorMessagesSchema}>
@@ -126,6 +136,7 @@ function EditProductDialog({
                   inputProps={{ style: { color: "black" } }}
                   onChange={handleChange}
                   name="title"
+                  disabled={loading}
                   value={values.title}
                   helperText={touched.title && errors.title}
                 />
@@ -135,6 +146,7 @@ function EditProductDialog({
                   InputLabelProps={{
                     style: { color: "black" },
                   }}
+                  disabled={loading}
                   error={Boolean(errors.desc) && touched.desc}
                   inputProps={{ style: { color: "black" } }}
                   onChange={handleChange}
@@ -146,7 +158,7 @@ function EditProductDialog({
                   setFieldValue={setFieldValue}
                   image={values.image}
                 />
-                <TextField
+                {/* <TextField
                   fullWidth
                   placeholder="Title"
                   InputLabelProps={{
@@ -173,10 +185,14 @@ function EditProductDialog({
                       </MenuItem>
                     );
                   })}
-                </TextField>
+                </TextField> */}
                 <DialogActions>
-                  <Button onClick={handleClose}>{t("CANCEL")}</Button>
-                  <Button onClick={() => handleSubmit()}>{t("UPDATE")}</Button>
+                  <Button onClick={handleClose} disabled={loading}>
+                    {t("CANCEL")}
+                  </Button>
+                  <Button onClick={() => handleSubmit()} disabled={loading}>
+                    {!loading ? t("UPDATE") : <CircularProgress />}
+                  </Button>
                 </DialogActions>
               </DialogContent>
             )}

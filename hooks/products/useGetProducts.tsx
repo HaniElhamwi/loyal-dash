@@ -36,6 +36,7 @@ const useGetAllProducts = () => {
     setMessage,
     message,
     products,
+    setProducts,
   };
 };
 

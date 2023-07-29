@@ -12,7 +12,9 @@ export default function Layout({
 }) {
   return (
     <div className="flex flex-row">
-      <Nav />
+      <div className="h-screen overflow-x-auto">
+        <Nav />
+      </div>
       <div>{children}</div>
     </div>
   );

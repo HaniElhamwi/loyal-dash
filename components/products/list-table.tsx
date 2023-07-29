@@ -8,16 +8,13 @@ import {
   TableRow,
   styled,
 } from "@mui/material";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import React, { useEffect, useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import { useTranslation } from "react-i18next";
-import DeleteIcon from "@mui/icons-material/Delete";
-import ModeEditIcon from "@mui/icons-material/ModeEdit";
-import { Field } from "formik";
+
 import useGetAllProducts from "@/hooks/products/useGetProducts";
 import ProductRow from "./product-row";
+import CategoryItems from "./category-items";
 
 const TableCellStyles = styled(TableCell)(({ theme }) => ({
   fontWeight: "medium",
@@ -27,13 +24,19 @@ const TableCellStyles = styled(TableCell)(({ theme }) => ({
 
 function ListTable() {
   const [editTableNumber, setEditTableNumber] = useState(-1);
-  const { getAllProducts, loading, message, products, setMessage } =
-    useGetAllProducts();
-  const { t } = useTranslation();
+  const {
+    getAllProducts,
+    loading,
+    message,
+    products,
+    setMessage,
+    setProducts,
+  } = useGetAllProducts();
 
   useEffect(() => {
     getAllProducts();
   }, []);
+
   return (
     <div>
       <Card className="mt-12" sx={{ background: "white", minWidth: 800 }}>
@@ -73,18 +76,18 @@ function ListTable() {
             {/* <EditProductDialog /> */}
             {!loading ? (
               <>
-                {products.map((item: any) => {
-                  return item.products.map((row: any, i: number) => (
-                    <>
-                      <ProductRow
-                        editTableNumber={editTableNumber}
-                        i={i}
-                        item={item}
-                        row={row}
-                        products={products}
-                      />
-                    </>
-                  ));
+                {products.map((item: any, prodIndex) => {
+                  return (
+                    <CategoryItems
+                      editTableNumber={editTableNumber}
+                      item={item}
+                      prodIndex={prodIndex}
+                      products={products}
+                      setProducts={setProducts}
+                      key={item.title}
+                    />
+                  );
+                  // ));
                 })}
               </>
             ) : (

@@ -14,6 +14,7 @@ import * as Yup from "yup";
 import { useTranslation } from "react-i18next";
 import useAddCategory from "@/hooks/categories/useAddDocument";
 import SnackBar from "@/utils/snack-bar";
+import { ToastContainer } from "react-toastify";
 
 function BasicDetails() {
   const { t } = useTranslation();
@@ -39,6 +40,18 @@ function BasicDetails() {
             <SnackBar setErrorMessage={setMessage} message={message} />
           )}
           <Card sx={{ background: "white", marginTop: 5, padding: 2 }}>
+            <ToastContainer
+              position="top-center"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme="light"
+            />
             <CardContent>
               <Grid container spacing={3}>
                 <Grid item xs={12} sm={4}>

@@ -1,10 +1,6 @@
 import {
-  Avatar,
   Box,
-  Button,
   Card,
-  CardActions,
-  CardContent,
   Grid,
   IconButton,
   Skeleton,
@@ -18,14 +14,14 @@ import {
   Typography,
   styled,
 } from "@mui/material";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import React, { useEffect, useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
-import { useTranslation } from "react-i18next";
-import { Field } from "formik";
+import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import useGetAllCategories from "@/hooks/categories/useGetCategories";
+import DeleteIcon from "@mui/icons-material/Delete";
 import { async } from "@firebase/util";
+import useDeleteProduct from "@/hooks/products/useDeleteProduct";
+import ConfirmationDialog from "../dialogs/confirmation-dialog";
 
 const TableCellStyles = styled(TableCell)(({ theme }) => ({
   fontWeight: "medium",
@@ -36,7 +32,7 @@ const TableCellStyles = styled(TableCell)(({ theme }) => ({
 const TableRowStyles = styled(TableRow)(({ theme }) => ({
   position: "relative",
   "&::after": {
-    background: "red",
+    // background: "red",
     position: "absolute",
     content: "''",
     width: "100%",
@@ -49,22 +45,18 @@ const TableRowStyles = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-const USERS = [
-  {
-    id: 1,
-    title: "Muhammed",
-    JobInfo: "Programer",
-    JoiningDate: "2023/06",
-    status: "Active",
-    company: "senior design",
-    email: "senior@gmail.com",
-  },
-];
-
 function CategoryList() {
   const [editTableNumber, setEditTableNumber] = useState(-1);
-  const { t } = useTranslation();
-  const { categories, getCategories, loading, message } = useGetAllCategories();
+  const { categories, getCategories, loading, message, deleteCategory } =
+    useGetAllCategories();
+  const { deleteProduct, loading: deleteProductLoading } = useDeleteProduct();
+
+  const handleDeleteProduct = (cat: string) => {
+    deleteProduct({
+      category: cat,
+    });
+    deleteCategory(cat);
+  };
 
   useEffect(() => {
     getCategories();
@@ -89,12 +81,9 @@ function CategoryList() {
               }}>
               <TableHead>
                 <TableRow>
-                  <TableCellStyles align="left"></TableCellStyles>
-                  {/* <TableCellStyles align="left">User Info</TableCellStyles>
-              <TableCellStyles align="left">Job Info</TableCellStyles>
-              <TableCellStyles align="left">Joining Date</TableCellStyles> */}
-                  <TableCellStyles align="left" colSpan={100}>
-                    title
+                  <TableCellStyles align="center">title</TableCellStyles>
+                  <TableCellStyles align="left">
+                    <h1 className="text-black font-bold">action</h1>
                   </TableCellStyles>
                 </TableRow>
               </TableHead>
@@ -103,59 +92,24 @@ function CategoryList() {
                 {categories.map((row, i) => (
                   <>
                     <TableRowStyles key={row}>
-                      <TableCell style={{ width: "10%" }}>
-                        <IconButton
-                          onClick={() =>
-                            setEditTableNumber(editTableNumber === i ? -1 : i)
-                          }>
-                          {editTableNumber !== i ? (
-                            <KeyboardArrowRightIcon sx={{ fontSize: 30 }} />
-                          ) : (
-                            <ExpandMoreIcon sx={{ fontSize: 30 }} />
-                          )}
-                        </IconButton>
+                      <TableCell colSpan={1} align="center">
+                        <Typography color="black">{row}</Typography>
                       </TableCell>
-                      <TableCell colSpan={4}>
-                        <Grid container>
-                          {/* <Grid item lg={2}>
-                        <Avatar alt={row.title} src="." />
-                      </Grid> */}
-                          <Grid item lg={10}>
-                            <Typography color="black">{row}</Typography>
-                            {/* <Typography color="textSecondary" variant="body2">
-                          {row.email}
-                        </Typography> */}
-                            {/* <Typography color="textSecondary" variant="body2">
-                          {row.JoiningDate}
-                        </Typography> */}
-                          </Grid>
-                        </Grid>
+                      <TableCell colSpan={1}>
+                        <div className="flex gap-2">
+                          <div className="flex flex-row">
+                            <ConfirmationDialog
+                              handleDelete={() => handleDeleteProduct(row)}
+                              message="warning if you delete a category all its related products will be deleted">
+                              <IconButton>
+                                <DeleteIcon color="error" />
+                              </IconButton>
+                            </ConfirmationDialog>
+                          </div>
+                        </div>
                       </TableCell>
-                      {/* <TableCell>
-                      <Typography color="primary" variant="subtitle2">
-                        {row.JobInfo}
-                      </Typography>
-                      <Typography color="textSecondary" variant="body2">
-                        {row.company}
-                      </Typography>
-                    </TableCell>
-                    <TableCell>{row.JoiningDate}</TableCell>
-                    <TableCell>
-                      <Typography
-                        sx={{
-                          fontWeight: "bold",
-                          fontSize: "0.75rem",
-                          color: "white",
-                          backgroundColor: "grey",
-                          borderRadius: 8,
-                          padding: "3px 10px",
-                          display: "inline-block",
-                        }}>
-                        {row.status}
-                      </Typography>
-                    </TableCell> */}
                     </TableRowStyles>
-                    {editTableNumber === i && (
+                    {/* {editTableNumber === i && (
                       <TableRow className="py-6 h-[200px]">
                         <TableCell colSpan={5}>
                           <div>this is good</div>
@@ -176,7 +130,7 @@ function CategoryList() {
                           </Button>
                         </TableCell>
                       </TableRow>
-                    )}
+                    )} */}
                   </>
                 ))}
               </TableBody>

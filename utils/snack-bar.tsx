@@ -1,6 +1,7 @@
 import { Snackbar } from "@mui/base";
 import { Alert, AlertColor } from "@mui/material";
 import React, { Dispatch, SetStateAction } from "react";
+import { ToastContainer, toast } from "react-toastify";
 
 function SnackBar({
   setErrorMessage,
@@ -18,19 +19,23 @@ function SnackBar({
   };
 }) {
   return (
-    <Snackbar
-      autoHideDuration={2000}
-      open
-      onClose={() =>
-        setErrorMessage({
-          message: "",
-          status: "",
-        })
-      }>
-      <Alert severity={message.status as AlertColor} sx={{ width: "100%" }}>
-        {message.message}
-      </Alert>
-    </Snackbar>
+    // <Snackbar
+    //   autoHideDuration={2000}
+    //   open
+    //   onClose={() =>
+    //     setErrorMessage({
+    //       message: "",
+    //       status: "",
+    //     })
+    //   }>
+    //   <Alert severity={message.status as AlertColor} sx={{ width: "100%" }}>
+    //     {message.message}
+    //   </Alert>
+    // </Snackbar>
+
+    <div>
+   
+    </div>
   );
 }
 

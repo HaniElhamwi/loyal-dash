@@ -30,12 +30,17 @@ const useGetAllCategories = () => {
     }
   };
 
+  const deleteCategory = (name: string) => {
+    setCategories(categories.filter((cat) => cat !== name));
+  };
+
   return {
     getCategories,
     loading,
     setMessage,
     message,
     categories,
+    deleteCategory,
   };
 };
 

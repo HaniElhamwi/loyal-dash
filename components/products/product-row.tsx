@@ -12,6 +12,8 @@ import { useTranslation } from "react-i18next";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import EditProductDialog from "./edit-product-dialog";
+import useDeleteProduct from "@/hooks/products/useDeleteProduct";
+import ConfirmationDialog from "../dialogs/confirmation-dialog";
 
 const TableRowStyles = styled(TableRow)(({ theme }) => ({
   position: "relative",
@@ -35,15 +37,34 @@ function ProductRow({
   i,
   editTableNumber,
   products,
+  setProducts,
+  index,
+  handleDeleteProduct,
 }: {
   row: any;
   item: any;
   i: number;
   editTableNumber: number;
   products: any;
+  setProducts: any;
+  index: number;
+  handleDeleteProduct: any;
 }) {
   const { t } = useTranslation();
   const [openEditDialog, setOpenEditDialog] = useState(false);
+  const [rowItem, setRowItem] = useState(row);
+
+  const { deleteProduct, loading, message, setMessage } = useDeleteProduct();
+
+  const deleteProductHandler = async () => {
+    const newProducts = item.products.filter(
+      (pro: { id: number }) => pro.id !== row.id
+    );
+    try {
+      await deleteProduct({ category: item.title, products: newProducts });
+      handleDeleteProduct(row.id);
+    } catch {}
+  };
 
   return (
     <>
@@ -51,29 +72,33 @@ function ProductRow({
         <EditProductDialog
           setOpen={setOpenEditDialog}
           open={openEditDialog}
-          prod={row}
+          prod={rowItem}
           products={products}
           item={item}
           id={row.id}
+          setProducts={setProducts}
+          prodIndex={index}
+          itemIndex={i}
+          setRowItem={setRowItem}
         />
       )}
       <TableRowStyles key={row.id}>
         <TableCell>
           <img
-            className="w-[100px] rounded h-[100px] object-cover"
+            className="w-[100px] rounded h-[100px] object-contain"
             alt=""
-            src={row.image}
+            src={rowItem.image}
           />
         </TableCell>
         <TableCell>
           <Typography color="black" variant="subtitle2">
-            {row.title}
+            {rowItem.title}
           </Typography>
         </TableCell>
         <TableCell>
           {" "}
           <Typography color="black" variant="subtitle2">
-            {row.desc}
+            {rowItem.desc}
           </Typography>
         </TableCell>
         <TableCell>
@@ -90,13 +115,20 @@ function ProductRow({
             {item.title}
           </Typography>
         </TableCell>
-        <TableCell>
-          <IconButton onClick={() => setOpenEditDialog(true)}>
-            <ModeEditIcon />
-          </IconButton>
-          <IconButton>
-            <DeleteIcon color="error" />
-          </IconButton>
+        <TableCell className="">
+          <div className="flex flex-row">
+            {" "}
+            <IconButton onClick={() => setOpenEditDialog(true)}>
+              <ModeEditIcon />
+            </IconButton>
+            <ConfirmationDialog
+              handleDelete={deleteProductHandler}
+              message="are you sure that you want to delete this product">
+              <IconButton>
+                <DeleteIcon color="error" />
+              </IconButton>
+            </ConfirmationDialog>
+          </div>
         </TableCell>
       </TableRowStyles>
       {editTableNumber === i && (

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { v4 as uuidv4 } from "uuid";
 import useUploadImage from "../useUploadImage";
+import { toast } from "react-toastify";
 
 interface IAddProductsProps {
   title: string;
@@ -55,6 +56,7 @@ const useAddProduct = () => {
         message: "Product added successfully",
         status: "success",
       });
+      toast("product added successfully");
     } catch (err: any) {
       setMessage({
         message: err.message,
@@ -64,6 +66,7 @@ const useAddProduct = () => {
         message: "Something went wrong",
         status: "error",
       });
+      toast("there is a problem pleas contact us");
       setLoading(false);
     }
   };
