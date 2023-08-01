@@ -60,7 +60,6 @@ function ProductRow({
     const newProducts = item.products.filter(
       (pro: { id: number }) => pro.id !== row.id
     );
-    console.log(newProducts);
     try {
       await deleteProduct({ category: item.title, products: newProducts });
       handleDeleteProduct(row.id);

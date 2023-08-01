@@ -89,6 +89,11 @@ export const theme = createTheme({
         },
       },
     },
+    MuiCheckbox: {
+      styleOverrides: {
+        root: {},
+      },
+    },
   },
 
   palette: {

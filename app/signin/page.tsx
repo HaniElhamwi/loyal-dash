@@ -25,7 +25,6 @@ function Page() {
 
   const onSignin = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(userData);
     signin({ email: userData.email, password: userData.password });
   };
   return (

@@ -1,10 +1,8 @@
 import {
   Box,
   Card,
-  Grid,
   IconButton,
   Skeleton,
-  Tab,
   Table,
   TableBody,
   TableCell,
@@ -63,7 +61,6 @@ function CategoryList() {
   useEffect(() => {
     getCategories();
   }, []);
-  console.log(categories);
   return (
     <div>
       <Card className="mt-12" sx={{ background: "white", minWidth: 800 }}>
@@ -92,48 +89,24 @@ function CategoryList() {
               <TableBody>
                 {/* */}
                 {categories.map((row, i) => (
-                  <>
-                    <TableRowStyles key={row}>
-                      <TableCell colSpan={1} align="center">
-                        <Typography color="black">{row}</Typography>
-                      </TableCell>
-                      <TableCell colSpan={1}>
-                        <div className="flex gap-2">
-                          <div className="flex flex-row">
-                            <ConfirmationDialog
-                              handleDelete={() => handleDeleteProduct(row)}
-                              message="warning if you delete a category all its related products will be deleted">
-                              <IconButton>
-                                <DeleteIcon color="error" />
-                              </IconButton>
-                            </ConfirmationDialog>
-                          </div>
+                  <TableRowStyles key={row}>
+                    <TableCell colSpan={1} align="center">
+                      <Typography color="black">{row}</Typography>
+                    </TableCell>
+                    <TableCell colSpan={1}>
+                      <div className="flex gap-2">
+                        <div className="flex flex-row">
+                          <ConfirmationDialog
+                            handleDelete={() => handleDeleteProduct(row)}
+                            message="warning if you delete a category all its related products will be deleted">
+                            <IconButton>
+                              <DeleteIcon color="error" />
+                            </IconButton>
+                          </ConfirmationDialog>
                         </div>
-                      </TableCell>
-                    </TableRowStyles>
-                    {/* {editTableNumber === i && (
-                      <TableRow className="py-6 h-[200px]">
-                        <TableCell colSpan={5}>
-                          <div>this is good</div>
-                          <div
-                            style={{ width: "100% important" }}
-                            className="py-6 px-3 flex gap-2 ">
-                            <div className="w-full flex gap-2 flex-col">
-                              <TextField fullWidth placeholder="date" />
-                              <TextField fullWidth placeholder="name" />
-                            </div>
-                            <div className="w-full flex gap-2 flex-col">
-                              <TextField fullWidth placeholder="Name" />
-                              <TextField fullWidth placeholder="Name" />
-                            </div>
-                          </div>
-                          <Button sx={{ ml: 2 }} size="large">
-                            {t("UPDATE")}
-                          </Button>
-                        </TableCell>
-                      </TableRow>
-                    )} */}
-                  </>
+                      </div>
+                    </TableCell>
+                  </TableRowStyles>
                 ))}
               </TableBody>
             </Table>

@@ -21,7 +21,6 @@ function useDeleteProduct() {
       // await deleteDoc(doc(db, "categories", category));
       const productRef = doc(db, "categories", category);
 
-      console.log(products);
       await updateDoc(productRef, {
         products: products,
       });

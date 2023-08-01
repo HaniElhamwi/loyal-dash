@@ -33,7 +33,6 @@ const useEditProduct = () => {
       const docSnap: any = await getDoc(docRef);
 
       if (image && image !== oldImage) {
-        console.log("uploading image");
         const imageUrl = await uploadFile({ file: image });
         imageData = imageUrl.image;
       } else {

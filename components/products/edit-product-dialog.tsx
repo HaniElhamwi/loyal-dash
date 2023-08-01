@@ -105,7 +105,6 @@ function EditProductDialog({
                   oldImage: prod.image,
                   id,
                 });
-                console.log(imageData);
                 // resetForm();
                 setRowItem({
                   title: values.title,

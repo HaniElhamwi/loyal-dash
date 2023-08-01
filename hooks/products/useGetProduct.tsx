@@ -43,7 +43,6 @@ const useGetProduct = () => {
       //   });
       const docRef = doc(db, "categories", category.replace(/%20/g, " "));
       const docSnap = await getDoc(docRef);
-      console.log(category.replace(/%20/g, ""));
 
       if (docSnap.exists()) {
         setProduct(docSnap.data());

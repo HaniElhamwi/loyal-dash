@@ -20,7 +20,6 @@ function DialogPickImage({
 }) {
   const [selectedImage, setSelectedImage] = useState<string>(image);
   const fileInputRef: any = useRef(null);
-  console.log(image);
   // Function to handle image selection
   const handleImageChange = (event: any) => {
     const file = event.target.files[0];

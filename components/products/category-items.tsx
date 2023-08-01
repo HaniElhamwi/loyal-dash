@@ -15,16 +15,13 @@ function CategoryItems(props: {
     const filteredProducts = categoryItems.filter(
       (pro: { id: string }) => pro.id !== i
     );
-    console.log("its ok");
-    console.log(filteredProducts);
-
     setCategoryItems(filteredProducts);
   };
   return (
     <>
       {categoryItems.map((row: any, i: number) => (
         <ProductRow
-          key={item.id}
+          key={row.id}
           editTableNumber={editTableNumber}
           i={i}
           item={item}

@@ -18,7 +18,6 @@ const useGetAllProducts = () => {
       querySnapshot.forEach((doc) => {
         productsData.push(doc.data());
       });
-      console.log(productsData);
       setProducts(productsData);
       setLoading(false);
     } catch (err: any) {
