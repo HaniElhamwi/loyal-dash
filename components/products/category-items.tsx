@@ -11,12 +11,13 @@ function CategoryItems(props: {
   const { editTableNumber, item, prodIndex, products, setProducts } = props;
   const [categoryItems, setCategoryItems] = useState(item.products);
 
-  const handleDeleteProduct = (i: number) => {
+  const handleDeleteProduct = (i: string) => {
     const filteredProducts = categoryItems.filter(
-      (pro: { id: string }) => pro.id === ""
+      (pro: { id: string }) => pro.id !== i
     );
-    console.log();
-    console.log(categoryItems);
+    console.log("its ok");
+    console.log(filteredProducts);
+
     setCategoryItems(filteredProducts);
   };
   return (

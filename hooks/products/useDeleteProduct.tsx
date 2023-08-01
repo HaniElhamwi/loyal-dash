@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { doc, deleteDoc } from "firebase/firestore";
+import { doc, deleteDoc, updateDoc } from "firebase/firestore";
 
 import { db } from "@/firebase";
 import { toast } from "react-toastify";
 
 interface IDeleteProductProps {
   category: string;
+  products: any;
 }
 
 function useDeleteProduct() {
@@ -14,10 +15,16 @@ function useDeleteProduct() {
     message: "",
     status: "",
   });
-  const deleteProduct = async ({ category }: IDeleteProductProps) => {
+  const deleteProduct = async ({ category, products }: IDeleteProductProps) => {
     try {
       setLoading(true);
-      await deleteDoc(doc(db, "categories", category));
+      // await deleteDoc(doc(db, "categories", category));
+      const productRef = doc(db, "categories", category);
+
+      console.log(products);
+      await updateDoc(productRef, {
+        products: products,
+      });
       setLoading(false);
       toast("Category deleted successfully");
     } catch {

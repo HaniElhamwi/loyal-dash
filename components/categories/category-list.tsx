@@ -22,6 +22,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { async } from "@firebase/util";
 import useDeleteProduct from "@/hooks/products/useDeleteProduct";
 import ConfirmationDialog from "../dialogs/confirmation-dialog";
+import useDeleteCategory from "@/hooks/categories/useDeleteCategory";
 
 const TableCellStyles = styled(TableCell)(({ theme }) => ({
   fontWeight: "medium",
@@ -32,7 +33,6 @@ const TableCellStyles = styled(TableCell)(({ theme }) => ({
 const TableRowStyles = styled(TableRow)(({ theme }) => ({
   position: "relative",
   "&::after": {
-    // background: "red",
     position: "absolute",
     content: "''",
     width: "100%",
@@ -46,13 +46,15 @@ const TableRowStyles = styled(TableRow)(({ theme }) => ({
 }));
 
 function CategoryList() {
-  const [editTableNumber, setEditTableNumber] = useState(-1);
   const { categories, getCategories, loading, message, deleteCategory } =
     useGetAllCategories();
-  const { deleteProduct, loading: deleteProductLoading } = useDeleteProduct();
+  const {
+    deleteCategory: deleteCategoryHandler,
+    loading: deleteProductLoading,
+  } = useDeleteCategory();
 
   const handleDeleteProduct = (cat: string) => {
-    deleteProduct({
+    deleteCategoryHandler({
       category: cat,
     });
     deleteCategory(cat);
