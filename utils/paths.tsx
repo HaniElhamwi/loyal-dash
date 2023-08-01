@@ -48,7 +48,7 @@ export const navItems = [
         style={{ color: "inherit" }}
       />
     ),
-    id: 2,
+    id: 3,
     items: [
       {
         id: 3,
@@ -71,6 +71,6 @@ export const navItems = [
         style={{ color: "inherit" }}
       />
     ),
-    id: 5,
+    id: 4,
   },
 ];

@@ -2,15 +2,12 @@
 
 import Nav from "@/components/common/nav";
 import "../styles/globals.css";
-import { Inter } from "next/font/google";
 import { I18nextProvider } from "react-i18next";
 import i18n from "@/i18n";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { red } from "@mui/material/colors";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export default function RootLayout({
   children,
@@ -19,8 +16,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        {/* <AuthHandler> */}
+      <body key={3}>
         <I18nextProvider i18n={i18n}>
           <ThemeProvider theme={theme}>
             <ToastContainer
@@ -38,7 +34,6 @@ export default function RootLayout({
             <div className="flex flex-row">{children}</div>
           </ThemeProvider>
         </I18nextProvider>
-        {/* </AuthHandler> */}
       </body>
     </html>
   );

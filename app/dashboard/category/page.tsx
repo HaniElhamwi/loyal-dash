@@ -12,33 +12,30 @@ function Page() {
   const { t } = useTranslation();
 
   return (
-    <>
-      <UpperNav />
-      <Container className="mt-12">
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "row",
-            gap: 1,
-            paddingTop: 7,
-            justifyContent: "space-between",
-          }}>
+    <Container className="mt-12">
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          gap: 1,
+          paddingTop: 7,
+          justifyContent: "space-between",
+        }}>
+        <div>
+          <div className="text-3xl font-bold">{t("CATEGORIES")}</div>
           <div>
-            <div className="text-3xl font-bold">{t("CATEGORIES")}</div>
-            <div>
-              {t("DASHBOARD")} <span className="dot">.</span> {t("CATEGORIES")}{" "}
-              <span className="dot">.</span> {t("LIST")}
-            </div>
+            {t("DASHBOARD")} <span className="dot">.</span> {t("CATEGORIES")}{" "}
+            <span className="dot">.</span> {t("LIST")}
           </div>
-          <Link href="/dashboard/category/create">
-            <Button size="large" startIcon={<AddIcon />}>
-              {t("ADD")}
-            </Button>
-          </Link>
-        </Box>
-        <CategoryList />
-      </Container>
-    </>
+        </div>
+        <Link href="/dashboard/category/create">
+          <Button size="large" startIcon={<AddIcon />}>
+            {t("ADD")}
+          </Button>
+        </Link>
+      </Box>
+      <CategoryList />
+    </Container>
   );
 }
 
