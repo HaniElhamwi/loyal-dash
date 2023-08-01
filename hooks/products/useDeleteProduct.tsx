@@ -20,12 +20,12 @@ function useDeleteProduct() {
       setLoading(true);
       // await deleteDoc(doc(db, "categories", category));
       const productRef = doc(db, "categories", category);
-
+      console.log(products);
       await updateDoc(productRef, {
-        products: products,
+        products,
       });
       setLoading(false);
-      toast("Category deleted successfully");
+      toast("Product deleted successfully");
     } catch {
       setLoading(false);
       toast("some thing went wrong");
