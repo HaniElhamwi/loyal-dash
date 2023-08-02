@@ -1,12 +1,13 @@
 import { getAuth } from "firebase/auth";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { auth } from "@/firebase";
 import { Router } from "next/router";
 
 function AuthHandler({ children }: { children: React.ReactChild }) {
   let router = useRouter();
   const [loading, setLoading] = useState(false);
+  const pathname = usePathname();
 
   Router.events.on("routeChangeStart", () => setLoading(() => true));
   Router.events.on("routeChangeError", () => setLoading(false));
@@ -14,6 +15,10 @@ function AuthHandler({ children }: { children: React.ReactChild }) {
   useEffect(() => {
     auth.onAuthStateChanged(function (user) {
       if (user) {
+        console.log(pathname);
+        if (pathname === "/signin/" || pathname === "/signin") {
+          router.push("/dashboard");
+        }
         router.push("/dashboard");
       } else {
         router.push("/signin");

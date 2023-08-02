@@ -6,7 +6,7 @@ import CategoryIcon from "@mui/icons-material/Category";
 export const navItems = [
   {
     title: "HOME",
-    url: "/home",
+    url: "/dashboard/home",
     icon: (
       <HomeIcon
         className="text-gray-400 text-[24px]"

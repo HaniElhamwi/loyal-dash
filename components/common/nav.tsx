@@ -1,4 +1,3 @@
-import Image from "next/image";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import NavItem from "./nav-item";
@@ -14,7 +13,7 @@ function Nav() {
     <div className=" text-primary w-[300px] bg-primary min-h-screen py-12 px-5 flex justify-between flex-col">
       <div>
         <div className="text-center flex_center">
-          <Image src="/images/logo.png" alt="" width={100} height={100} />
+          <img src="/images/logo.png" alt="" className="w-[100px] h-[100px]" />
         </div>
         <div className="mt-4">
           <h5 className="text-md text-gray-400 font-medium ">
