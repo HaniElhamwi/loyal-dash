@@ -8,6 +8,7 @@ import { createTheme, ThemeProvider } from "@mui/material";
 import { red } from "@mui/material/colors";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
+import AuthHandler from "@/utils/auth-handler";
 
 export default function RootLayout({
   children,
@@ -31,7 +32,9 @@ export default function RootLayout({
               pauseOnHover
               theme="dark"
             />
-            <div className="flex flex-row">{children}</div>
+            <AuthHandler>
+              <div className="flex flex-row">{children}</div>
+            </AuthHandler>
           </ThemeProvider>
         </I18nextProvider>
       </body>

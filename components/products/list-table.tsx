@@ -66,6 +66,7 @@ function ListTable() {
         <Table sx={{ minWidth: 800 }}>
           <TableHead>
             <TableRow>
+              <TableCellStyles></TableCellStyles>
               <TableCellStyles align="left" className="">
                 <h1 className="text-black font-bold">image</h1>
               </TableCellStyles>

@@ -61,7 +61,6 @@ function ProductRow({
       return pro.id !== row.id;
     });
     // console.log(row.id);
-    console.log(newProducts);
     try {
       await deleteProduct({ category: item.title, products: newProducts });
       handleDeleteProduct(row.id);
@@ -70,21 +69,23 @@ function ProductRow({
 
   return (
     <>
-      {openEditDialog && (
-        <EditProductDialog
-          setOpen={setOpenEditDialog}
-          open={openEditDialog}
-          prod={rowItem}
-          products={products}
-          item={item}
-          id={row.id}
-          setProducts={setProducts}
-          prodIndex={index}
-          itemIndex={i}
-          setRowItem={setRowItem}
-        />
-      )}
       <TableRowStyles key={row.id}>
+        <TableCell>
+          {openEditDialog && (
+            <EditProductDialog
+              setOpen={setOpenEditDialog}
+              open={openEditDialog}
+              prod={rowItem}
+              products={products}
+              item={item}
+              id={row.id}
+              setProducts={setProducts}
+              prodIndex={index}
+              itemIndex={i}
+              setRowItem={setRowItem}
+            />
+          )}
+        </TableCell>
         <TableCell>
           <img
             className="w-[100px] rounded h-[100px] object-contain"
