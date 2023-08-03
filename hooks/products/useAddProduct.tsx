@@ -22,7 +22,6 @@ const useAddProduct = () => {
 
   const { uploadFile } = useUploadImage();
 
-  const router = useRouter();
   const addProducts = async ({
     title,
     desc,

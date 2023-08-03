@@ -15,11 +15,9 @@ function AuthHandler({ children }: { children: React.ReactChild }) {
   useEffect(() => {
     auth.onAuthStateChanged(function (user) {
       if (user) {
-        console.log(pathname);
         if (pathname === "/signin/" || pathname === "/signin") {
           router.push("/dashboard");
         }
-        router.push("/dashboard");
       } else {
         router.push("/signin");
       }

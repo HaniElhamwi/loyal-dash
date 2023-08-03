@@ -16,8 +16,23 @@ import useAddCategory from "@/hooks/categories/useAddDocument";
 import SnackBar from "@/utils/snack-bar";
 import { ToastContainer } from "react-toastify";
 
-function BasicDetails() {
+interface IFormikProps {
+  handleChange: any;
+  errors: any;
+  touched: any;
+  values: any;
+  loading: boolean;
+}
+
+function BasicDetails(props: IFormikProps) {
   const { t } = useTranslation();
+  const {
+    errors,
+    handleChange,
+    touched,
+    values,
+    loading: addingLoading,
+  } = props;
 
   const DisplayingErrorMessagesSchema = Yup.object().shape({
     title: Yup.string().required("title is required").min(3).max(40),
@@ -26,82 +41,55 @@ function BasicDetails() {
   const { addCategory, message, loading, setMessage } = useAddCategory();
 
   return (
-    <Formik
-      initialValues={{
-        title: "",
-      }}
-      onSubmit={(values) => {
-        addCategory({ title: values.title });
-      }}
-      validationSchema={DisplayingErrorMessagesSchema}>
-      {({ values, handleChange, errors, handleSubmit, touched }) => (
-        <div>
-          {message.message && (
-            <SnackBar setErrorMessage={setMessage} message={message} />
-          )}
-          <Card sx={{ background: "white", marginTop: 5, padding: 2 }}>
-            <ToastContainer
-              position="top-center"
-              autoClose={5000}
-              hideProgressBar={false}
-              newestOnTop={false}
-              closeOnClick
-              rtl={false}
-              pauseOnFocusLoss
-              draggable
-              pauseOnHover
-              theme="light"
-            />
-            <CardContent>
-              <Grid container spacing={3}>
-                <Grid item xs={12} sm={4}>
-                  <div className=" font-bold mt-3 text-[#333]">
-                    {t("BASIC_DETAILS")}
-                  </div>
-                </Grid>
-                <Grid item xs={12} sm={8}>
-                  <Typography variant="subtitle2" color="#333" className="mb-2">
-                    {t("TITLE")}
-                  </Typography>
-                  <TextField
-                    fullWidth
-                    placeholder="Title"
-                    inputProps={{ style: { color: "black" } }}
-                    InputLabelProps={{
-                      style: { color: "black" },
-                    }}
-                    name="title"
-                    onChange={handleChange}
-                    error={Boolean(errors.title)}
-                    helperText={touched.title && errors.title}
-                  />
-                  <div className="mt-4">
-                    {/* <Typography variant="subtitle2" color="#333" className="mb-2">
-                {t("DESCRIPTION")}
-              </Typography> */}
-                    {/* <TextField
+    <div>
+      {message.message && (
+        <SnackBar setErrorMessage={setMessage} message={message} />
+      )}
+      <Card sx={{ background: "white", marginTop: 5, padding: 2 }}>
+        <ToastContainer
+          position="top-center"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
+        <CardContent>
+          <Grid container spacing={3}>
+            <Grid item xs={12} sm={4}>
+              <div className=" font-bold mt-3 text-[#333]">
+                {t("BASIC_DETAILS")}
+              </div>
+            </Grid>
+            <Grid item xs={12} sm={8}>
+              <Typography variant="subtitle2" color="#333" className="mb-2">
+                {t("TITLE")}
+              </Typography>
+              <TextField
                 fullWidth
+                disabled={addingLoading}
                 placeholder="Title"
+                inputProps={{ style: { color: "black" } }}
                 InputLabelProps={{
                   style: { color: "black" },
                 }}
-                minRows={3}
-                rows={4}
-                multiline
-              /> */}
-                  </div>
-                </Grid>
-              </Grid>
-            </CardContent>
-            <CardActions>
-              <Button onClick={() => handleSubmit()}>
-                {t("ADD_CATEGORY")}
-              </Button>
-            </CardActions>
-          </Card>
-        </div>
-      )}
-    </Formik>
+                value={values.title}
+                name="title"
+                onChange={handleChange}
+                error={Boolean(errors.title) && touched.title}
+                helperText={touched.title && errors.title}
+                required
+              />
+              <div className="mt-4"></div>
+            </Grid>
+          </Grid>
+        </CardContent>
+      </Card>
+    </div>
   );
 }
 

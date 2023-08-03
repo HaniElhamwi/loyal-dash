@@ -64,14 +64,14 @@ function PickCategory(props: IFormikProps) {
               helperText={touched.category && errors.category}
               inputProps={{ style: { color: "black" } }}
               select>
-              {categories.map((item: string) => {
+              {categories.map((item) => {
                 return (
                   <MenuItem
                     color="black"
-                    key={item}
-                    value={item}
+                    key={item.id}
+                    value={item.title}
                     sx={{ color: "white" }}>
-                    {item}
+                    {item.title}
                   </MenuItem>
                 );
               })}

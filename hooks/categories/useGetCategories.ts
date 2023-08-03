@@ -2,9 +2,16 @@ import { db } from "@/firebase";
 import { collection, query, getDocs } from "firebase/firestore";
 import { useState } from "react";
 
+export interface ICategoryProps {
+  title: string;
+  id: string;
+  image: string;
+  proLength: number;
+}
+
 const useGetAllCategories = () => {
   const [loading, setLoading] = useState(false);
-  const [categories, setCategories] = useState([]);
+  const [categories, setCategories] = useState<ICategoryProps[]>([]);
   const [message, setMessage] = useState({
     message: "",
     status: "",
@@ -17,7 +24,12 @@ const useGetAllCategories = () => {
       const q = query(collection(db, "categories"));
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
-        categoriesPicker.push(doc.id);
+        categoriesPicker.push({
+          title: doc.data().title,
+          id: doc.id,
+          image: doc.data().image,
+          proLength: doc.data().products.length,
+        });
       });
       setCategories(categoriesPicker);
       setLoading(false);
@@ -31,7 +43,7 @@ const useGetAllCategories = () => {
   };
 
   const deleteCategory = (name: string) => {
-    setCategories(categories.filter((cat) => cat !== name));
+    setCategories(categories.filter((cat) => cat.title !== name));
   };
 
   return {
@@ -41,6 +53,7 @@ const useGetAllCategories = () => {
     message,
     categories,
     deleteCategory,
+    setCategories,
   };
 };
 

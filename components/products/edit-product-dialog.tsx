@@ -157,34 +157,6 @@ function EditProductDialog({
                   setFieldValue={setFieldValue}
                   image={values.image}
                 />
-                {/* <TextField
-                  fullWidth
-                  placeholder="Title"
-                  InputLabelProps={{
-                    style: { color: "black" },
-                  }}
-                  SelectProps={{
-                    style: { color: "black" },
-                  }}
-                  name="category"
-                  value={values.category}
-                  error={Boolean(errors.category) && touched.category}
-                  onChange={handleChange}
-                  helperText={touched?.category && errors?.category}
-                  inputProps={{ style: { color: "black" } }}
-                  select>
-                  {products.map((item: any) => {
-                    return (
-                      <MenuItem
-                        color="black"
-                        key={item.title}
-                        value={item.title}
-                        sx={{ color: "white" }}>
-                        {item.title}
-                      </MenuItem>
-                    );
-                  })}
-                </TextField> */}
                 <DialogActions>
                   <Button onClick={handleClose} disabled={loading}>
                     {t("CANCEL")}

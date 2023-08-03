@@ -1,18 +1,31 @@
-import { TextFieldsTwoTone } from "@mui/icons-material";
 import {
   Box,
   Card,
   CardActions,
   CardContent,
   Grid,
-  TextField,
-  Typography,
+  Stack,
 } from "@mui/material";
-import React from "react";
+import React, { useState, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import UploadIcon from "@mui/icons-material/Upload";
+import Image from "next/image";
+import DeleteIcon from "@mui/icons-material/Delete";
 
-function PickImage() {
+function PickImage({ setFieldValue }: { setFieldValue: any }) {
+  const [selectedImage, setSelectedImage] = useState<string>("");
+  const fileInputRef: any = useRef(null);
+
+  // Function to handle image selection
+  const handleImageChange = (event: any) => {
+    const file = event.target.files[0];
+    setSelectedImage(URL.createObjectURL(file));
+    setFieldValue("image", file);
+  };
+  const handleButtonClick = () => {
+    fileInputRef.current.click();
+  };
+
   const { t } = useTranslation();
   return (
     <Card
@@ -39,13 +52,47 @@ function PickImage() {
                 gap: 3,
                 alignItems: "center",
                 cursor: "pointer",
-              }}>
+              }}
+              onClick={handleButtonClick}>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleImageChange}
+                ref={fileInputRef}
+                style={{ display: "none" }}
+              />
               <div className="p-4 rounded-full max-w-max bg-[#999]">
                 <UploadIcon />
               </div>
               <h3 className="text-[#666] text-lg font-bold">
                 {t("CLICK_TO_UPLOAD")}
               </h3>
+            </Box>
+            <Box>
+              {selectedImage && (
+                <Stack
+                  className="mt-5"
+                  display="flex"
+                  flexDirection="row"
+                  alignItems="center"
+                  justifyContent="space-around">
+                  <Image
+                    src={selectedImage}
+                    alt=""
+                    width={100}
+                    height={100}
+                    className="w-[100px] h-[100px]"
+                  />
+                  <DeleteIcon
+                    color="error"
+                    sx={{ cursor: "pointer" }}
+                    onClick={() => {
+                      setSelectedImage("");
+                      setFieldValue("image", "");
+                    }}
+                  />
+                </Stack>
+              )}
             </Box>
           </Grid>
         </Grid>

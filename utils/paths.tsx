@@ -14,6 +14,18 @@ export const navItems = [
       />
     ),
     id: 1,
+    items: [
+      {
+        id: 3,
+        title: "upper banner",
+        url: "/dashboard/home/upper-banner",
+      },
+      {
+        id: 4,
+        title: "lower banner",
+        url: "/dashboard/home/lower-banner",
+      },
+    ],
   },
   {
     title: "PRODUCTS",

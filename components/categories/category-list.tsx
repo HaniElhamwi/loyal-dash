@@ -12,15 +12,15 @@ import {
   Typography,
   styled,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import useGetAllCategories from "@/hooks/categories/useGetCategories";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { async } from "@firebase/util";
-import useDeleteProduct from "@/hooks/products/useDeleteProduct";
 import ConfirmationDialog from "../dialogs/confirmation-dialog";
 import useDeleteCategory from "@/hooks/categories/useDeleteCategory";
+import EditCategoryDialog from "./edit-dialog";
+import useEditCategory from "@/hooks/categories/useEditCategory";
 
 const TableCellStyles = styled(TableCell)(({ theme }) => ({
   fontWeight: "medium",
@@ -44,7 +44,7 @@ const TableRowStyles = styled(TableRow)(({ theme }) => ({
 }));
 
 function CategoryList() {
-  const { categories, getCategories, loading, message, deleteCategory } =
+  const { categories, getCategories, loading, deleteCategory, setCategories } =
     useGetAllCategories();
   const {
     deleteCategory: deleteCategoryHandler,
@@ -56,6 +56,33 @@ function CategoryList() {
       category: cat,
     });
     deleteCategory(cat);
+  };
+
+  const { editProduct, loading: editLoading } = useEditCategory();
+
+  const handleEditCat = async (
+    cat: string,
+    newImage: any,
+    oldImage: string
+  ) => {
+    try {
+      const { imageData } = await editProduct({
+        category: cat,
+        image: newImage,
+        oldImage,
+      });
+      setCategories(
+        categories.map((c) => {
+          if (c.id === cat) {
+            return {
+              ...c,
+              image: imageData,
+            };
+          }
+          return c;
+        })
+      );
+    } catch {}
   };
 
   useEffect(() => {
@@ -80,7 +107,12 @@ function CategoryList() {
               }}>
               <TableHead>
                 <TableRow>
+                  <TableCellStyles align="center">image</TableCellStyles>
                   <TableCellStyles align="center">title</TableCellStyles>
+                  <TableCellStyles align="center">
+                    products count
+                  </TableCellStyles>
+
                   <TableCellStyles align="left">
                     <h1 className="text-black font-bold">action</h1>
                   </TableCellStyles>
@@ -89,15 +121,36 @@ function CategoryList() {
               <TableBody>
                 {/* */}
                 {categories.map((row, i) => (
-                  <TableRowStyles key={row}>
+                  <TableRowStyles key={row.id}>
+                    <TableCell align="center" className="flex justify-center">
+                      <img
+                        src={row.image}
+                        alt=""
+                        className="w-[100px] h-[100px] text-center rounded"
+                      />
+                    </TableCell>
                     <TableCell colSpan={1} align="center">
-                      <Typography color="black">{row}</Typography>
+                      <Typography color="black">{row.title}</Typography>
+                    </TableCell>
+                    <TableCell colSpan={1} align="center">
+                      <Typography color="black">{row.proLength}</Typography>
                     </TableCell>
                     <TableCell colSpan={1}>
                       <div className="flex gap-2">
                         <div className="flex flex-row">
+                          <EditCategoryDialog
+                            image={row.image || ""}
+                            onEdit={handleEditCat}
+                            category={row}
+                            loading={editLoading}>
+                            <IconButton
+                            // ÷  onClick={() => setOpenEditDialog(true)}
+                            >
+                              <ModeEditIcon />
+                            </IconButton>
+                          </EditCategoryDialog>
                           <ConfirmationDialog
-                            handleDelete={() => handleDeleteProduct(row)}
+                            handleDelete={() => handleDeleteProduct(row.title)}
                             message="warning if you delete a category all its related products will be deleted">
                             <IconButton>
                               <DeleteIcon color="error" />

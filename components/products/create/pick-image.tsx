@@ -12,7 +12,13 @@ import UploadIcon from "@mui/icons-material/Upload";
 import Image from "next/image";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-function PickImage({ setFieldValue }: { setFieldValue: any }) {
+function PickImage({
+  setFieldValue,
+  loading,
+}: {
+  setFieldValue: any;
+  loading: boolean;
+}) {
   const [selectedImage, setSelectedImage] = useState<string>("");
   const fileInputRef: any = useRef(null);
 
@@ -60,6 +66,7 @@ function PickImage({ setFieldValue }: { setFieldValue: any }) {
                 onChange={handleImageChange}
                 ref={fileInputRef}
                 style={{ display: "none" }}
+                disabled={loading}
               />
               <div className="p-4 rounded-full max-w-max bg-[#999]">
                 <UploadIcon />

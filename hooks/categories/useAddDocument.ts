@@ -3,6 +3,7 @@ import { doc, setDoc } from "firebase/firestore";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
+import useUploadImage from "../useUploadImage";
 
 const useAddCategory = () => {
   const [loading, setLoading] = useState(false);
@@ -10,14 +11,28 @@ const useAddCategory = () => {
     message: "",
     status: "",
   });
+  const { uploadFile } = useUploadImage();
 
   const router = useRouter();
-  const addCategory = async ({ title }: { title: string }) => {
+  const addCategory = async ({
+    title,
+    image,
+  }: {
+    title: string;
+    image: any;
+  }) => {
     try {
       setLoading(true);
+      let imageData = "";
+
+      if (image) {
+        const imageUrl = await uploadFile({ file: image });
+        imageData = imageUrl.image;
+      }
       await setDoc(doc(db, "categories", title), {
         title,
         products: [],
+        image: imageData,
       });
       router.push("/dashboard/category");
       setLoading(false);
