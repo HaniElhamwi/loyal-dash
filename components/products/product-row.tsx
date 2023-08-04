@@ -119,7 +119,6 @@ function ProductRow({
         </TableCell>
         <TableCell className="">
           <div className="flex flex-row">
-            {" "}
             <IconButton onClick={() => setOpenEditDialog(true)}>
               <ModeEditIcon />
             </IconButton>

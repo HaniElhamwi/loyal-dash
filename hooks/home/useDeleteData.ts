@@ -11,15 +11,11 @@ interface IDeleteProductProps {
 
 function useDeleteProduct() {
   const [loading, setLoading] = useState<boolean>(false);
-  const [message, setMessage] = useState({
-    message: "",
-    status: "",
-  });
+
   const deleteProduct = async ({ category, products }: IDeleteProductProps) => {
     try {
       setLoading(true);
-      // await deleteDoc(doc(db, "categories", category));
-      const productRef = doc(db, "categories", category);
+      const productRef = doc(db, "home", category);
       await updateDoc(productRef, {
         products,
       });
@@ -33,8 +29,6 @@ function useDeleteProduct() {
   return {
     deleteProduct,
     loading,
-    setMessage,
-    message,
   };
 }
 

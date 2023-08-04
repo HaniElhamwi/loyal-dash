@@ -1,5 +1,5 @@
 export const en = {
-  CONCEPTS: "Concepts",
+  CONCEPTS: "Mahrouseh",
   DASHBOARD: "Dashboard",
   PRODUCTS: "Products",
   LIST: "List",
@@ -23,4 +23,6 @@ export const en = {
   CANCEL: "Cancel",
   DELETE_PRODUCT_ANNOUNCEMENT:
     "Are you sure that you want to delete this product",
+  LOWER_BANNER: "Lower Banner",
+  UPPER_BANNER: "Upper Banner",
 };

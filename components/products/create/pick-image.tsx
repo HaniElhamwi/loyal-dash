@@ -17,7 +17,7 @@ function PickImage({
   loading,
 }: {
   setFieldValue: any;
-  loading: boolean;
+  loading?: boolean;
 }) {
   const [selectedImage, setSelectedImage] = useState<string>("");
   const fileInputRef: any = useRef(null);
