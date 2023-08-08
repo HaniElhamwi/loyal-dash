@@ -68,7 +68,7 @@ function PickCategory(props: IFormikProps) {
                 return (
                   <MenuItem
                     color="black"
-                    key={item.id}
+                    key={item.title.en}
                     value={item.title.en}
                     sx={{ color: "white" }}>
                     {item.title.en}
