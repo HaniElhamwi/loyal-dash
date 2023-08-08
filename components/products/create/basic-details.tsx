@@ -1,3 +1,4 @@
+import TabsWrappedLabel from "@/utils/tabs";
 import {
   Card,
   CardActions,
@@ -6,7 +7,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 interface IFormikProps {
@@ -20,9 +21,14 @@ interface IFormikProps {
 function BasicDetails(props: IFormikProps) {
   const { t } = useTranslation();
   const { errors, handleChange, touched, values, loading } = props;
+  const [selectedLan, setSelectedLan] = useState("en");
 
   return (
-    <Card sx={{ background: "white", marginTop: 5, padding: 2 }}>
+    <Card sx={{ background: "white", marginTop: 5 }}>
+      <TabsWrappedLabel
+        setSelectedLan={setSelectedLan}
+        selectedLan={selectedLan}
+      />
       <CardContent>
         <Grid container spacing={3}>
           <Grid item xs={12} sm={4}>
@@ -41,12 +47,20 @@ function BasicDetails(props: IFormikProps) {
                 style: { color: "black" },
               }}
               disabled={loading}
-              error={Boolean(errors.title) && touched.title}
               inputProps={{ style: { color: "black" } }}
               onChange={handleChange}
-              name="title"
-              value={values.title}
-              helperText={touched.title && errors.title}
+              name={`title.${selectedLan}`}
+              value={values.title[selectedLan]}
+              helperText={
+                touched.title && touched.title
+                  ? errors.title && "enter all languages titles"
+                  : ""
+              }
+              error={
+                touched.title && touched.title[selectedLan]
+                  ? Boolean(errors.title && errors.title[selectedLan])
+                  : false
+              }
             />
             <div className="mt-4">
               <Typography variant="subtitle2" color="#333" className="mb-2">
@@ -59,14 +73,22 @@ function BasicDetails(props: IFormikProps) {
                   style: { color: "black" },
                 }}
                 disabled={loading}
-                value={values.desc}
-                error={Boolean(errors.desc) && touched.desc}
+                value={values.desc[selectedLan]}
                 inputProps={{ style: { color: "black" } }}
                 rows={4}
                 multiline
                 onChange={handleChange}
-                name="desc"
-                helperText={touched.desc && errors.desc}
+                name={`desc.${selectedLan}`}
+                helperText={
+                  touched.title && touched.title
+                    ? errors.title && "enter all languages descriptions"
+                    : ""
+                }
+                error={
+                  touched.title && touched.title[selectedLan]
+                    ? Boolean(errors.title && errors.title[selectedLan])
+                    : false
+                }
               />
             </div>
           </Grid>

@@ -7,9 +7,17 @@ import useUploadImage from "../useUploadImage";
 import { toast } from "react-toastify";
 
 interface IAddProductsProps {
-  title: string;
+  title: {
+    ar: string;
+    en: string;
+    tr: string;
+  };
   category: string;
-  desc: string;
+  desc: {
+    ar: string;
+    en: string;
+    tr: string;
+  };
   image: any;
 }
 

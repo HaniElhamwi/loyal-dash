@@ -31,7 +31,6 @@ interface IRowProps {
   title: string;
   id: string;
   desc: string;
-
   deleteHandler: (id: string) => void;
 }
 
@@ -40,22 +39,7 @@ function ProductRow(props: IRowProps) {
 
   return (
     <TableRowStyles key={id}>
-      <TableCell>
-        {/* {openEditDialog && (
-          <EditProductDialog
-            setOpen={setOpenEditDialog}
-            open={openEditDialog}
-            prod={rowItem}
-            products={products}
-            item={item}
-            id={row.id}
-            setProducts={setProducts}
-            prodIndex={index}
-            itemIndex={i}
-            setRowItem={setRowItem}
-          />
-        )} */}
-      </TableCell>
+      <TableCell></TableCell>
       <TableCell>
         <img
           className="w-[100px] rounded h-[100px] object-contain"
@@ -74,25 +58,9 @@ function ProductRow(props: IRowProps) {
           {desc}
         </Typography>
       </TableCell>
-      {/* <TableCell>
-        <Typography
-          sx={{
-            fontWeight: "bold",
-            fontSize: "0.75rem",
-            color: "white",
-            backgroundColor: "grey",
-            borderRadius: 8,
-            padding: "3px 10px",
-            display: "inline-block",
-          }}> */}
-      {/* {item.title} */}
-      {/* </Typography>
-      </TableCell> */}
       <TableCell className="">
         <div className="flex flex-row">
-          <IconButton
-          //   onClick={() => setOpenEditDialog(true)}
-          >
+          <IconButton>
             <ModeEditIcon />
           </IconButton>
           <ConfirmationDialog

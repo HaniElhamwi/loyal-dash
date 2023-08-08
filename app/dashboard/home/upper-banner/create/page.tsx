@@ -21,10 +21,17 @@ import SnackBar from "@/utils/snack-bar";
 import useAddData from "@/hooks/home/useAddData";
 
 const DisplayingErrorMessagesSchema = Yup.object().shape({
-  title: Yup.string().required("title is required").min(3).max(40),
-  desc: Yup.string().required("title is required").min(3).max(40),
+  title: Yup.object({
+    en: Yup.string().required("English title is required").min(3).max(40),
+    ar: Yup.string().required("Arabic title is required").min(3).max(40),
+    tr: Yup.string().required("Turkish title is required").min(3).max(40),
+  }),
+  desc: Yup.object({
+    en: Yup.string().required("English title is required").min(3).max(40),
+    ar: Yup.string().required("Arabic title is required").min(3).max(40),
+    tr: Yup.string().required("Turkish title is required").min(3).max(40),
+  }),
 });
-
 function Page() {
   const { t } = useTranslation();
 
@@ -57,26 +64,27 @@ function Page() {
       </Box>
       <Formik
         initialValues={{
-          title: "",
-          desc: "",
+          title: {
+            en: "",
+            ar: "",
+            tr: "",
+          },
+          desc: {
+            en: "",
+            ar: "",
+            tr: "",
+          },
           image: "",
         }}
         onSubmit={async (values, { resetForm }) => {
           try {
-            // await addProducts({
-            //   category: values.category,
-            //   desc: values.desc,
-            //   image: values.image,
-            //   title: values.title,
-            // });
-
             addData({
               title: values.title,
               desc: values.desc,
               image: values.image,
               category: "upper",
             });
-            // resetForm();
+            resetForm();
           } catch {}
         }}
         validationSchema={DisplayingErrorMessagesSchema}>

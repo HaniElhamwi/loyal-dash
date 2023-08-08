@@ -21,15 +21,22 @@ import { useRouter } from "next/navigation";
 import SnackBar from "@/utils/snack-bar";
 
 const DisplayingErrorMessagesSchema = Yup.object().shape({
-  title: Yup.string().required("title is required").min(3).max(40),
-  desc: Yup.string().required("title is required").min(3).max(40),
+  title: Yup.object({
+    ar: Yup.string().required("arabic title is required").min(3).max(40),
+    en: Yup.string().required("english title is required").min(3).max(40),
+    tr: Yup.string().required("turkish title is required").min(3).max(40),
+  }),
+  desc: Yup.object({
+    ar: Yup.string().required("arabic desc is required").min(3).max(40),
+    en: Yup.string().required("english desc is required").min(3).max(40),
+    tr: Yup.string().required("turkish desc is required").min(3).max(40),
+  }),
   category: Yup.string().required("title is required"),
 });
 
 function Page() {
   const { t } = useTranslation();
   const { addProducts, loading, message, setMessage } = useAddProduct();
-  const router = useRouter();
   return (
     <Container className="mt-12">
       <Box
@@ -57,8 +64,16 @@ function Page() {
       </Box>
       <Formik
         initialValues={{
-          title: "",
-          desc: "",
+          title: {
+            ar: "",
+            en: "",
+            tr: "",
+          },
+          desc: {
+            ar: "",
+            en: "",
+            tr: "",
+          },
           image: "",
           category: "",
         }}
@@ -100,7 +115,13 @@ function Page() {
               loading={loading}
             />
             <CardActions className="mt-4 flex gap-3" dir="rtl">
-              <Button size="large" onClick={() => handleSubmit()}>
+              <Button
+                size="large"
+                onClick={() => {
+                  handleSubmit();
+                  console.log("its clicking");
+                  console.log(errors);
+                }}>
                 {!loading ? t("ADD_PRODUCTS") : <CircularProgress />}
               </Button>
               <Link href="/dashboard/products">

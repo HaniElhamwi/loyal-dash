@@ -42,7 +42,11 @@ function EditCategoryDialog({
   image: string;
   children: any;
   loading: boolean;
-  onEdit: (cat: string, newImage: any, oldImage: string) => void;
+  onEdit: (
+    cat: { ar: string; en: string; tr: string },
+    newImage: any,
+    oldImage: string
+  ) => void;
   category: ICategoryProps;
 }) {
   const { t } = useTranslation();
@@ -79,12 +83,7 @@ function EditCategoryDialog({
                 onEdit(category.title, values.image, image);
               } catch {}
             }}>
-            {({
-              values,
-              handleSubmit,
-              touched,
-              setFieldValue,
-            }) => (
+            {({ values, handleSubmit, touched, setFieldValue }) => (
               <DialogContent className="flex gap-3 flex-col">
                 <DialogPickImage
                   setFieldValue={setFieldValue}

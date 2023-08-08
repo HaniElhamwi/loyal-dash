@@ -7,6 +7,7 @@ function CategoryItems(props: {
   products: any;
   setProducts: any;
   prodIndex: any;
+  selectedLan: any;
 }) {
   const { editTableNumber, item, prodIndex, products, setProducts } = props;
   const [categoryItems, setCategoryItems] = useState(item.products);
@@ -21,7 +22,7 @@ function CategoryItems(props: {
     <>
       {categoryItems.map((row: any, i: number) => (
         <ProductRow
-          key={row.id}
+          key={row.title.ar}
           editTableNumber={editTableNumber}
           i={i}
           item={item}
@@ -30,6 +31,7 @@ function CategoryItems(props: {
           setProducts={setProducts}
           index={prodIndex}
           handleDeleteProduct={handleDeleteProduct}
+          selectedLan={props.selectedLan}
         />
       ))}
     </>

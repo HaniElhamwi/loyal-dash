@@ -77,6 +77,35 @@ export const theme = createTheme({
               transition: "0.4s all",
             },
           },
+
+          "& .MuiTabs-indicator": {
+            backgroundColor: "#6366F1",
+          },
+        },
+      },
+    },
+    // theming mui tabs with priamry back and color
+    MuiTabs: {
+      styleOverrides: {
+        root: {
+          backgroundColor: "#6366F1",
+          color: "white",
+          borderRadius: "10px",
+          // "&:hover": {
+          //   backgroundColor: "#eee",
+          //   border: "1px #eee solid",
+          // },
+          "& .MuiOutlinedInput-root": {
+            "&.Mui-focused fieldset": {
+              backgroundColor: "",
+              border: "3px #6366F1 solid",
+              borderColor: "#6366F1",
+              color: "white",
+            },
+          },
+          "& .MuiButtonBase-root": {
+            color: "white",
+          },
         },
       },
     },

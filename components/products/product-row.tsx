@@ -40,6 +40,7 @@ function ProductRow({
   setProducts,
   index,
   handleDeleteProduct,
+  selectedLan,
 }: {
   row: any;
   item: any;
@@ -49,6 +50,7 @@ function ProductRow({
   setProducts: any;
   index: number;
   handleDeleteProduct: any;
+  selectedLan: any;
 }) {
   const { t } = useTranslation();
   const [openEditDialog, setOpenEditDialog] = useState(false);
@@ -68,7 +70,7 @@ function ProductRow({
 
   return (
     <>
-      <TableRowStyles key={row.id}>
+      <TableRowStyles>
         <TableCell>
           {openEditDialog && (
             <EditProductDialog
@@ -94,13 +96,13 @@ function ProductRow({
         </TableCell>
         <TableCell>
           <Typography color="black" variant="subtitle2">
-            {rowItem.title}
+            {rowItem.title[selectedLan]}
           </Typography>
         </TableCell>
         <TableCell>
           {" "}
           <Typography color="black" variant="subtitle2">
-            {rowItem.desc}
+            {rowItem.desc[selectedLan]}
           </Typography>
         </TableCell>
         <TableCell>
@@ -114,7 +116,7 @@ function ProductRow({
               padding: "3px 10px",
               display: "inline-block",
             }}>
-            {item.title}
+            {item.title.en}
           </Typography>
         </TableCell>
         <TableCell className="">

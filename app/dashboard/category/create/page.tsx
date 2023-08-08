@@ -17,7 +17,11 @@ import * as Yup from "yup";
 import Link from "next/link";
 
 const DisplayingErrorMessagesSchema = Yup.object().shape({
-  title: Yup.string().required("title is required").min(3).max(40),
+  title: Yup.object({
+    ar: Yup.string().required("arabic title is required").min(3).max(40),
+    en: Yup.string().required("english title is required").min(3).max(40),
+    tr: Yup.string().required("turkish title is required").min(3).max(40),
+  }),
 });
 
 function Page() {
@@ -44,7 +48,11 @@ function Page() {
         </Box>
         <Formik
           initialValues={{
-            title: "",
+            title: {
+              ar: "",
+              en: "",
+              tr: "",
+            },
             image: "",
           }}
           onSubmit={async (values, { resetForm }) => {

@@ -9,12 +9,13 @@ import {
   Typography,
 } from "@mui/material";
 import { Formik } from "formik";
-import React from "react";
+import React, { useState } from "react";
 import * as Yup from "yup";
 import { useTranslation } from "react-i18next";
 import useAddCategory from "@/hooks/categories/useAddDocument";
 import SnackBar from "@/utils/snack-bar";
 import { ToastContainer } from "react-toastify";
+import TabsHandler from "@/utils/tabs";
 
 interface IFormikProps {
   handleChange: any;
@@ -25,6 +26,7 @@ interface IFormikProps {
 }
 
 function BasicDetails(props: IFormikProps) {
+  const [selectedLan, setSelectedLan] = useState("en");
   const { t } = useTranslation();
   const {
     errors,
@@ -34,10 +36,6 @@ function BasicDetails(props: IFormikProps) {
     loading: addingLoading,
   } = props;
 
-  const DisplayingErrorMessagesSchema = Yup.object().shape({
-    title: Yup.string().required("title is required").min(3).max(40),
-  });
-
   const { addCategory, message, loading, setMessage } = useAddCategory();
 
   return (
@@ -45,7 +43,7 @@ function BasicDetails(props: IFormikProps) {
       {message.message && (
         <SnackBar setErrorMessage={setMessage} message={message} />
       )}
-      <Card sx={{ background: "white", marginTop: 5, padding: 2 }}>
+      <Card sx={{ background: "white", marginTop: 5 }}>
         <ToastContainer
           position="top-center"
           autoClose={5000}
@@ -57,6 +55,10 @@ function BasicDetails(props: IFormikProps) {
           draggable
           pauseOnHover
           theme="light"
+        />
+        <TabsHandler
+          selectedLan={selectedLan}
+          setSelectedLan={setSelectedLan}
         />
         <CardContent>
           <Grid container spacing={3}>
@@ -77,11 +79,20 @@ function BasicDetails(props: IFormikProps) {
                 InputLabelProps={{
                   style: { color: "black" },
                 }}
-                value={values.title}
-                name="title"
+                value={values.title[selectedLan]}
+                name={`title.${selectedLan}`}
                 onChange={handleChange}
-                error={Boolean(errors.title) && touched.title}
-                helperText={touched.title && errors.title}
+                // selected lamaige may be null
+                error={
+                  touched.title && touched.title[selectedLan]
+                    ? Boolean(errors.title && errors.title[selectedLan])
+                    : false
+                }
+                helperText={
+                  touched.title && touched.title
+                    ? errors.title && "enter all languages titles"
+                    : ""
+                }
                 required
               />
               <div className="mt-4"></div>

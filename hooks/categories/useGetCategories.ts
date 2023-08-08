@@ -3,10 +3,15 @@ import { collection, query, getDocs } from "firebase/firestore";
 import { useState } from "react";
 
 export interface ICategoryProps {
-  title: string;
+  title: {
+    en: string;
+    ar: string;
+    tr: string;
+  };
   id: string;
   image: string;
   proLength: number;
+  products: number[];
 }
 
 const useGetAllCategories = () => {
@@ -25,10 +30,7 @@ const useGetAllCategories = () => {
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
         categoriesPicker.push({
-          title: doc.data().title,
-          id: doc.id,
-          image: doc.data().image,
-          proLength: doc.data().products.length,
+          ...doc.data(),
         });
       });
       setCategories(categoriesPicker);
@@ -43,7 +45,7 @@ const useGetAllCategories = () => {
   };
 
   const deleteCategory = (name: string) => {
-    setCategories(categories.filter((cat) => cat.title !== name));
+    setCategories(categories.filter((cat) => cat.title.tr !== name));
   };
 
   return {

@@ -5,6 +5,7 @@ import Menu, { MenuProps } from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { Box, Checkbox, FormControlLabel } from "@mui/material";
+import LanSwitcher from "./lan-switcher";
 
 const StyledMenu = styled((props: MenuProps) => (
   <Menu
@@ -53,16 +54,22 @@ const BoxStyles = styled(Box)`
   border-bottom: 1px solid #eee;
   border-top: 1px solid #eee;
   padding: 10px 20px;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
 `;
 
 export default function CustomizedMenus({
   categories,
   selectedCategories,
   setSelectedCategories,
+
+  setSelectedLan,
 }: {
   categories: any;
   selectedCategories: string[];
   setSelectedCategories: React.Dispatch<React.SetStateAction<string[]>>;
+  setSelectedLan: React.Dispatch<React.SetStateAction<string>>;
 }) {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -84,45 +91,48 @@ export default function CustomizedMenus({
 
   return (
     <BoxStyles>
-      <Button
-        id="demo-customized-button"
-        aria-controls={open ? "demo-customized-menu" : undefined}
-        aria-haspopup="true"
-        aria-expanded={open ? "true" : undefined}
-        variant="contained"
-        disableElevation
-        onClick={handleClick}
-        endIcon={<KeyboardArrowDownIcon />}>
-        Categories
-      </Button>
-      <StyledMenu
-        id="demo-customized-menu"
-        MenuListProps={{
-          "aria-labelledby": "demo-customized-button",
-        }}
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}>
-        {categories &&
-          categories.map((item: any) => {
-            return (
-              <MenuItem
-                key={item.title}
-                disableRipple
-                sx={{ color: "white !important" }}>
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={selectedCategories.includes(item.title)}
-                      onClick={(event) => handleToggle(item.title, event)}
-                    />
-                  }
-                  label={item.title}
-                />
-              </MenuItem>
-            );
-          })}
-      </StyledMenu>
+      <div>
+        <Button
+          id="demo-customized-button"
+          aria-controls={open ? "demo-customized-menu" : undefined}
+          aria-haspopup="true"
+          aria-expanded={open ? "true" : undefined}
+          variant="contained"
+          disableElevation
+          onClick={handleClick}
+          endIcon={<KeyboardArrowDownIcon />}>
+          Categories
+        </Button>
+        <StyledMenu
+          id="demo-customized-menu"
+          MenuListProps={{
+            "aria-labelledby": "demo-customized-button",
+          }}
+          anchorEl={anchorEl}
+          open={open}
+          onClose={handleClose}>
+          {categories &&
+            categories.map((item: any) => {
+              return (
+                <MenuItem
+                  key={item.title.en}
+                  disableRipple
+                  sx={{ color: "white !important" }}>
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        checked={selectedCategories.includes(item.title.en)}
+                        onClick={(event) => handleToggle(item.title.en, event)}
+                      />
+                    }
+                    label={item.title.en}
+                  />
+                </MenuItem>
+              );
+            })}
+        </StyledMenu>
+      </div>
+      <LanSwitcher setSelectedLan={setSelectedLan} />
     </BoxStyles>
   );
 }

@@ -70,10 +70,10 @@ function UpperList({ homeSection }: { homeSection: "uppper" | "lower" }) {
             {!loading ? (
               products.map((prod: any) => (
                 <ProductRow
-                  desc={prod.desc}
+                  desc={prod.desc["en"]}
                   id={prod.id}
                   image={prod.image}
-                  title={prod.title}
+                  title={prod.title["en"]}
                   key={prod.id}
                   deleteHandler={deleteRow}
                 />

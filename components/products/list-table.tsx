@@ -15,6 +15,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import useGetAllProducts from "@/hooks/products/useGetProducts";
 import CategoryItems from "./category-items";
 import FilteringMenu from "./filtering-menu";
+import LanSwitcher from "./lan-switcher";
 
 const TableCellStyles = styled(TableCell)(({ theme }) => ({
   fontWeight: "medium",
@@ -25,6 +26,7 @@ const TableCellStyles = styled(TableCell)(({ theme }) => ({
 function ListTable() {
   const [editTableNumber, setEditTableNumber] = useState(-1);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [selectedLan, setSelectedLan] = useState("en");
 
   const {
     getAllProducts,
@@ -42,10 +44,11 @@ function ListTable() {
   const filteredProducts = useMemo(() => {
     if (selectedCategories.length) {
       return products.filter((product: any) =>
-        selectedCategories.includes(product.title)
+        selectedCategories.includes(product.title.en)
       );
     } else return products;
   }, [selectedCategories.length, products.length]);
+  
 
   return (
     <div>
@@ -57,12 +60,14 @@ function ListTable() {
             className="text-black outline-none	 w-full"
           />
         </div>
-        <FilteringMenu
-          categories={products}
-          selectedCategories={selectedCategories}
-          setSelectedCategories={setSelectedCategories}
-        />
-
+        <div>
+          <FilteringMenu
+            categories={products}
+            selectedCategories={selectedCategories}
+            setSelectedCategories={setSelectedCategories}
+            setSelectedLan={setSelectedLan}
+          />
+        </div>
         <Table sx={{ minWidth: 800 }}>
           <TableHead>
             <TableRow>
@@ -93,7 +98,8 @@ function ListTable() {
                   prodIndex={prodIndex}
                   products={products}
                   setProducts={setProducts}
-                  key={item.title}
+                  key={item.title.ar}
+                  selectedLan={selectedLan}
                 />
               ))
             ) : (

@@ -61,19 +61,21 @@ function CategoryList() {
   const { editProduct, loading: editLoading } = useEditCategory();
 
   const handleEditCat = async (
-    cat: string,
+    cat: {
+      en: string;
+    },
     newImage: any,
     oldImage: string
   ) => {
     try {
       const { imageData } = await editProduct({
-        category: cat,
+        category: cat.en,
         image: newImage,
         oldImage,
       });
       setCategories(
         categories.map((c) => {
-          if (c.id === cat) {
+          if (c.title.en === cat.en) {
             return {
               ...c,
               image: imageData,
@@ -88,6 +90,7 @@ function CategoryList() {
   useEffect(() => {
     getCategories();
   }, []);
+
   return (
     <div>
       <Card className="mt-12" sx={{ background: "white", minWidth: 800 }}>
@@ -112,7 +115,6 @@ function CategoryList() {
                   <TableCellStyles align="center">
                     products count
                   </TableCellStyles>
-
                   <TableCellStyles align="left">
                     <h1 className="text-black font-bold">action</h1>
                   </TableCellStyles>
@@ -121,7 +123,7 @@ function CategoryList() {
               <TableBody>
                 {/* */}
                 {categories.map((row, i) => (
-                  <TableRowStyles key={row.id}>
+                  <TableRowStyles key={row.image}>
                     <TableCell align="center" className="flex justify-center">
                       <img
                         src={row.image}
@@ -130,10 +132,12 @@ function CategoryList() {
                       />
                     </TableCell>
                     <TableCell colSpan={1} align="center">
-                      <Typography color="black">{row.title}</Typography>
+                      <Typography color="black">{row.title["en"]}</Typography>
                     </TableCell>
                     <TableCell colSpan={1} align="center">
-                      <Typography color="black">{row.proLength}</Typography>
+                      <Typography color="black">
+                        {row?.products?.length}
+                      </Typography>
                     </TableCell>
                     <TableCell colSpan={1}>
                       <div className="flex gap-2">
@@ -150,7 +154,9 @@ function CategoryList() {
                             </IconButton>
                           </EditCategoryDialog>
                           <ConfirmationDialog
-                            handleDelete={() => handleDeleteProduct(row.title)}
+                            handleDelete={() =>
+                              handleDeleteProduct(row.title.en)
+                            }
                             message="warning if you delete a category all its related products will be deleted">
                             <IconButton>
                               <DeleteIcon color="error" />

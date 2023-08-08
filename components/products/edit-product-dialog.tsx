@@ -7,10 +7,11 @@ import {
   DialogTitle,
   MenuItem,
   Slide,
+  Tabs,
   TextField,
 } from "@mui/material";
 import { TransitionProps } from "@mui/material/transitions";
-import React, { Dispatch, SetStateAction } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { useTranslation } from "react-i18next";
@@ -18,10 +19,19 @@ import DialogUploadImage from "./dialog-upload-image";
 import DialogPickImage from "./dialog-upload-image";
 import useEditProduct from "@/hooks/products/useEditProduct";
 import SnackBar from "@/utils/snack-bar";
+import TabsWrappedLabel from "@/utils/tabs";
 
 const DisplayingErrorMessagesSchema = Yup.object().shape({
-  title: Yup.string().required("title is required").min(3).max(40),
-  desc: Yup.string().required("title is required").min(3).max(40),
+  title: Yup.object({
+    en: Yup.string().required("English title is required").min(3).max(40),
+    ar: Yup.string().required("Arabic title is required").min(3).max(40),
+    tr: Yup.string().required("Turkish title is required").min(3).max(40),
+  }),
+  desc: Yup.object({
+    en: Yup.string().required("English title is required").min(3).max(40),
+    ar: Yup.string().required("Arabic title is required").min(3).max(40),
+    tr: Yup.string().required("Turkish title is required").min(3).max(40),
+  }),
   category: Yup.string().required("title is required"),
 });
 
@@ -63,7 +73,7 @@ function EditProductDialog({
   prodIndex: number;
 }) {
   const { t } = useTranslation();
-
+  const [selectedLan, setSelectedLan] = useState<any>("en");
   const { editProduct, loading, message, setMessage } = useEditProduct();
   const handleClickOpen = () => {
     setOpen(true);
@@ -93,7 +103,7 @@ function EditProductDialog({
               title: prod.title,
               desc: prod.desc,
               image: prod.image,
-              category: item.title,
+              category: item.title.en,
             }}
             onSubmit={async (values, { resetForm }) => {
               try {
@@ -105,7 +115,6 @@ function EditProductDialog({
                   oldImage: prod.image,
                   id,
                 });
-                // resetForm();
                 setRowItem({
                   title: values.title,
                   desc: values.desc,
@@ -123,49 +132,71 @@ function EditProductDialog({
               handleSubmit,
               touched,
               setFieldValue,
-            }) => (
-              <DialogContent className="flex gap-3 flex-col">
-                <TextField
-                  fullWidth
-                  placeholder="Title"
-                  InputLabelProps={{
-                    style: { color: "black" },
-                  }}
-                  error={Boolean(errors.title) && touched.title}
-                  inputProps={{ style: { color: "black" } }}
-                  onChange={handleChange}
-                  name="title"
-                  disabled={loading}
-                  value={values.title}
-                  helperText={touched.title && errors.title}
-                />
-                <TextField
-                  fullWidth
-                  placeholder="Description"
-                  InputLabelProps={{
-                    style: { color: "black" },
-                  }}
-                  disabled={loading}
-                  error={Boolean(errors.desc) && touched.desc}
-                  inputProps={{ style: { color: "black" } }}
-                  onChange={handleChange}
-                  name="desc"
-                  value={values.desc}
-                  helperText={touched.desc && errors.desc}
-                />
-                <DialogPickImage
-                  setFieldValue={setFieldValue}
-                  image={values.image}
-                />
-                <DialogActions>
-                  <Button onClick={handleClose} disabled={loading}>
-                    {t("CANCEL")}
-                  </Button>
-                  <Button onClick={() => handleSubmit()} disabled={loading}>
-                    {!loading ? t("UPDATE") : <CircularProgress />}
-                  </Button>
-                </DialogActions>
-              </DialogContent>
+            }: any) => (
+              <div>
+                <DialogContent className="flex gap-3 flex-col">
+                  <TabsWrappedLabel
+                    selectedLan={selectedLan}
+                    setSelectedLan={setSelectedLan}
+                  />
+                  <TextField
+                    fullWidth
+                    placeholder="Title"
+                    InputLabelProps={{
+                      style: { color: "black" },
+                    }}
+                    inputProps={{ style: { color: "black" } }}
+                    onChange={handleChange}
+                    name={`title.${selectedLan}`}
+                    disabled={loading}
+                    value={values.title[selectedLan]}
+                    helperText={
+                      touched.title && touched.title
+                        ? errors.title && "enter all languages titles"
+                        : ""
+                    }
+                    error={
+                      touched.title && touched?.title[selectedLan]
+                        ? Boolean(errors.title && errors.title[selectedLan])
+                        : false
+                    }
+                  />
+                  <TextField
+                    fullWidth
+                    placeholder="Description"
+                    InputLabelProps={{
+                      style: { color: "black" },
+                    }}
+                    disabled={loading}
+                    inputProps={{ style: { color: "black" } }}
+                    onChange={handleChange}
+                    name={`desc.${selectedLan}`}
+                    value={values.desc[selectedLan as any]}
+                    helperText={
+                      touched.title && touched.title
+                        ? errors.title && "enter all languages titles"
+                        : ""
+                    }
+                    error={
+                      touched.title && touched?.title[selectedLan]
+                        ? Boolean(errors.title && errors.title[selectedLan])
+                        : false
+                    }
+                  />
+                  <DialogPickImage
+                    setFieldValue={setFieldValue}
+                    image={values.image}
+                  />
+                  <DialogActions>
+                    <Button onClick={handleClose} disabled={loading}>
+                      {t("CANCEL")}
+                    </Button>
+                    <Button onClick={() => handleSubmit()} disabled={loading}>
+                      {!loading ? t("UPDATE") : <CircularProgress />}
+                    </Button>
+                  </DialogActions>
+                </DialogContent>
+              </div>
             )}
           </Formik>
         </Dialog>

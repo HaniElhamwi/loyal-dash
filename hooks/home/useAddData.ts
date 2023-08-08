@@ -5,10 +5,15 @@ import { v4 as uuidv4 } from "uuid";
 import useUploadImage from "../useUploadImage";
 import { toast } from "react-toastify";
 
+interface ILanguages {
+  en: string;
+  ar: string;
+  tr: string;
+}
 interface IAddProductsProps {
-  title: string;
+  title: ILanguages;
   category: string;
-  desc: string;
+  desc: ILanguages;
   image: any;
 }
 

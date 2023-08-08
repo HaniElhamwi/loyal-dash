@@ -21,8 +21,16 @@ import SnackBar from "@/utils/snack-bar";
 import useAddData from "@/hooks/home/useAddData";
 
 const DisplayingErrorMessagesSchema = Yup.object().shape({
-  title: Yup.string().required("title is required").min(3).max(40),
-  desc: Yup.string().required("title is required").min(3).max(40),
+  title: Yup.object({
+    en: Yup.string().required("English title is required").min(3).max(40),
+    ar: Yup.string().required("Arabic title is required").min(3).max(40),
+    tr: Yup.string().required("Turkish title is required").min(3).max(40),
+  }),
+  desc: Yup.object({
+    en: Yup.string().required("English title is required").min(3).max(40),
+    ar: Yup.string().required("Arabic title is required").min(3).max(40),
+    tr: Yup.string().required("Turkish title is required").min(3).max(40),
+  }),
 });
 
 function Page() {
@@ -57,8 +65,16 @@ function Page() {
       </Box>
       <Formik
         initialValues={{
-          title: "",
-          desc: "",
+          title: {
+            ar: "",
+            en: "",
+            tr: "",
+          },
+          desc: {
+            ar: "",
+            en: "",
+            tr: "",
+          },
           image: "",
         }}
         onSubmit={async (values, { resetForm }) => {
@@ -90,7 +106,6 @@ function Page() {
               loading={loading}
             />
             <PickImage setFieldValue={setFieldValue} />
-
             <CardActions className="mt-4 flex gap-3" dir="rtl">
               <Button size="large" onClick={() => handleSubmit()}>
                 {!loading ? t("ADD_PRODUCTS") : <CircularProgress />}

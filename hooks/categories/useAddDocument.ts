@@ -18,7 +18,11 @@ const useAddCategory = () => {
     title,
     image,
   }: {
-    title: string;
+    title: {
+      ar: string;
+      en: string;
+      tr: string;
+    };
     image: any;
   }) => {
     try {
@@ -29,7 +33,7 @@ const useAddCategory = () => {
         const imageUrl = await uploadFile({ file: image });
         imageData = imageUrl.image;
       }
-      await setDoc(doc(db, "categories", title), {
+      await setDoc(doc(db, "categories", title.en), {
         title,
         products: [],
         image: imageData,
