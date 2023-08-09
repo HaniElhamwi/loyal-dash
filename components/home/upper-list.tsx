@@ -20,7 +20,7 @@ const TableCellStyles = styled(TableCell)(({ theme }) => ({
   color: "#333",
 }));
 
-function UpperList({ homeSection }: { homeSection: "uppper" | "lower" }) {
+function UpperList({ homeSection }: { homeSection: "upper" | "lower" }) {
   const [editTableNumber, setEditTableNumber] = useState(-1);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
 
