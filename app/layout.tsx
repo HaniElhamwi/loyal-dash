@@ -1,6 +1,5 @@
 "use client";
 
-import Nav from "@/components/common/nav";
 import "../styles/globals.css";
 import { I18nextProvider } from "react-i18next";
 import i18n from "@/i18n";
@@ -17,6 +16,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" href="/favpng.png" type="image/png" sizes="32x32" />
+      </head>
       <body key={3}>
         <I18nextProvider i18n={i18n}>
           <ThemeProvider theme={theme}>

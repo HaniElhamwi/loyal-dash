@@ -54,7 +54,7 @@ function ProductRow({
 }) {
   const { t } = useTranslation();
   const [openEditDialog, setOpenEditDialog] = useState(false);
-  const [rowItem, setRowItem] = useState(row);
+  const [rowItem, setRowItem] = useState<any>(row);
 
   const { deleteProduct, loading } = useDeleteProduct();
 
@@ -103,6 +103,12 @@ function ProductRow({
           {" "}
           <Typography color="black" variant="subtitle2">
             {rowItem.desc[selectedLan]}
+          </Typography>
+        </TableCell>
+        <TableCell>
+          {" "}
+          <Typography color="black" variant="subtitle2">
+            {rowItem.price}
           </Typography>
         </TableCell>
         <TableCell>

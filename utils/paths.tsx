@@ -4,29 +4,29 @@ import GroupIcon from "@mui/icons-material/Group";
 import CategoryIcon from "@mui/icons-material/Category";
 
 export const navItems = [
-  {
-    title: "HOME",
-    url: "/dashboard/home",
-    icon: (
-      <HomeIcon
-        className="text-gray-400 text-[24px]"
-        style={{ color: "inherit" }}
-      />
-    ),
-    id: 1,
-    items: [
-      {
-        id: 3,
-        title: "upper banner",
-        url: "/dashboard/home/upper-banner",
-      },
-      {
-        id: 4,
-        title: "lower banner",
-        url: "/dashboard/home/lower-banner",
-      },
-    ],
-  },
+  // {
+  //   title: "HOME",
+  //   url: "/dashboard/home",
+  //   icon: (
+  //     <HomeIcon
+  //       className="text-gray-400 text-[24px]"
+  //       style={{ color: "inherit" }}
+  //     />
+  //   ),
+  //   id: 1,
+  //   items: [
+  //     {
+  //       id: 3,
+  //       title: "upper banner",
+  //       url: "/dashboard/home/upper-banner",
+  //     },
+  //     {
+  //       id: 4,
+  //       title: "lower banner",
+  //       url: "/dashboard/home/lower-banner",
+  //     },
+  //   ],
+  // },
   {
     title: "PRODUCTS",
     url: "/dashboard/products",

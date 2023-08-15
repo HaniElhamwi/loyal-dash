@@ -12,6 +12,7 @@ interface IAddProductsProps {
   image: any;
   oldImage: any;
   id: string;
+  price: number;
 }
 
 const useEditProduct = () => {
@@ -26,7 +27,7 @@ const useEditProduct = () => {
   const router = useRouter();
   const editProduct = async (props: IAddProductsProps) => {
     let imageData = "";
-    const { title, desc, image, category, oldImage, id } = props;
+    const { title, desc, image, category, oldImage, id, price } = props;
     try {
       setLoading(true);
       const docRef = doc(db, "categories", category);
@@ -48,6 +49,7 @@ const useEditProduct = () => {
         desc,
         id,
         image: imageData,
+        price,
       };
       await updateDoc(productRef, {
         products: newProducts.products,

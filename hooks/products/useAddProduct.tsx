@@ -19,6 +19,7 @@ interface IAddProductsProps {
     tr: string;
   };
   image: any;
+  price: number;
 }
 
 const useAddProduct = () => {
@@ -35,6 +36,7 @@ const useAddProduct = () => {
     desc,
     image,
     category,
+    price,
   }: IAddProductsProps) => {
     try {
       setLoading(true);
@@ -55,6 +57,7 @@ const useAddProduct = () => {
             desc,
             id: uuidv4(),
             image: imageData,
+            price: price,
           },
         ],
       });

@@ -62,6 +62,31 @@ function BasicDetails(props: IFormikProps) {
                   : false
               }
             />
+            <Typography variant="subtitle2" color="#333" className="mt-2">
+              {t("PRICE")}
+            </Typography>
+            <TextField
+              fullWidth
+              placeholder="Price"
+              InputLabelProps={{
+                style: { color: "black" },
+              }}
+              disabled={loading}
+              inputProps={{ style: { color: "black" } }}
+              onChange={handleChange}
+              name="price"
+              value={values.handleChange}
+              helperText={
+                touched.price && touched.price
+                  ? errors.price && "enter all languages prices"
+                  : ""
+              }
+              error={
+                touched.price && touched.price
+                  ? Boolean(errors.price && errors.price)
+                  : false
+              }
+            />
             <div className="mt-4">
               <Typography variant="subtitle2" color="#333" className="mb-2">
                 {t("DESCRIPTION")}
@@ -75,8 +100,6 @@ function BasicDetails(props: IFormikProps) {
                 disabled={loading}
                 value={values.desc[selectedLan]}
                 inputProps={{ style: { color: "black" } }}
-                rows={4}
-                multiline
                 onChange={handleChange}
                 name={`desc.${selectedLan}`}
                 helperText={

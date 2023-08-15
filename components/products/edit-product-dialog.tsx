@@ -33,6 +33,7 @@ const DisplayingErrorMessagesSchema = Yup.object().shape({
     tr: Yup.string().required("Turkish title is required").min(3).max(40),
   }),
   category: Yup.string().required("title is required"),
+  price: Yup.number().required("price is required"),
 });
 
 const Transition = React.forwardRef(function Transition(
@@ -63,6 +64,7 @@ function EditProductDialog({
     desc: string;
     image: string;
     category: string;
+    price: number;
   };
   id: string;
   item: any;
@@ -104,6 +106,7 @@ function EditProductDialog({
               desc: prod.desc,
               image: prod.image,
               category: item.title.en,
+              price: prod.price,
             }}
             onSubmit={async (values, { resetForm }) => {
               try {
@@ -114,12 +117,14 @@ function EditProductDialog({
                   category: values.category,
                   oldImage: prod.image,
                   id,
+                  price: values.price,
                 });
                 setRowItem({
                   title: values.title,
                   desc: values.desc,
                   image: imageData,
                   category: values.category,
+                  price: values.price,
                 });
                 setOpen(false);
               } catch {}
@@ -180,6 +185,28 @@ function EditProductDialog({
                     error={
                       touched.title && touched?.title[selectedLan]
                         ? Boolean(errors.title && errors.title[selectedLan])
+                        : false
+                    }
+                  />
+                  <TextField
+                    fullWidth
+                    placeholder="Price"
+                    InputLabelProps={{
+                      style: { color: "black" },
+                    }}
+                    disabled={loading}
+                    inputProps={{ style: { color: "black" } }}
+                    onChange={handleChange}
+                    name="price"
+                    value={values.price}
+                    helperText={
+                      touched.price && touched.price
+                        ? errors.price && "enter all languages prices"
+                        : ""
+                    }
+                    error={
+                      touched.price && touched?.price
+                        ? Boolean(errors.price && errors.price)
                         : false
                     }
                   />

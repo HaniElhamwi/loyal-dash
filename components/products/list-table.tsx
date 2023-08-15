@@ -48,7 +48,6 @@ function ListTable() {
       );
     } else return products;
   }, [selectedCategories.length, products.length]);
-  
 
   return (
     <div>
@@ -79,7 +78,10 @@ function ListTable() {
                 <h1 className="text-black font-bold">title</h1>
               </TableCellStyles>
               <TableCellStyles align="left">
-                <h1 className="text-black font-bold">desc</h1>
+                <h1 className="text-black font-bold">description</h1>
+              </TableCellStyles>
+              <TableCellStyles align="left">
+                <h1 className="text-black font-bold">price</h1>
               </TableCellStyles>
               <TableCellStyles align="left">
                 <h1 className="text-black font-bold">category</h1>

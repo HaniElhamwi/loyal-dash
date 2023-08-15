@@ -32,6 +32,7 @@ const DisplayingErrorMessagesSchema = Yup.object().shape({
     tr: Yup.string().required("turkish desc is required").min(3).max(40),
   }),
   category: Yup.string().required("title is required"),
+  price: Yup.number().required("price field is required"),
 });
 
 function Page() {
@@ -76,6 +77,7 @@ function Page() {
           },
           image: "",
           category: "",
+          price: 0,
         }}
         onSubmit={async (values, { resetForm }) => {
           try {
@@ -84,6 +86,7 @@ function Page() {
               desc: values.desc,
               image: values.image,
               title: values.title,
+              price: values.price,
             });
             resetForm();
           } catch {}

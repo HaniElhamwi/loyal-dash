@@ -25,4 +25,5 @@ export const en = {
     "Are you sure that you want to delete this product",
   LOWER_BANNER: "Lower Banner",
   UPPER_BANNER: "Upper Banner",
+  PRICE: "price",
 };
