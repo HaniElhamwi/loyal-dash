@@ -1,10 +1,7 @@
 "use client";
 
-import UpperNav from "@/components/common/upper-nav";
 import ListTable from "@/components/gifts/list-table";
-import AddIcon from "@mui/icons-material/Add";
-import { Box, Button, Container } from "@mui/material";
-import Link from "next/link";
+import { Box, Container } from "@mui/material";
 import React from "react";
 import { useTranslation } from "react-i18next";
 

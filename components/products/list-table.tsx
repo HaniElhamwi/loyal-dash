@@ -12,7 +12,7 @@ import {
 import React, { useEffect, useMemo, useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import useGetAllProducts from "@/hooks/products/useGetProducts";
+import useGetAllProducts from "@/hooks/gifts/useGetGifts";
 import CategoryItems from "./category-items";
 import FilteringMenu from "./filtering-menu";
 import LanSwitcher from "./lan-switcher";
