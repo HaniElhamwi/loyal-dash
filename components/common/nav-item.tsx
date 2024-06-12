@@ -26,7 +26,7 @@ function NavItem({ title, subitem, index, url, icon }: NavItemProps) {
   const router = useRouter();
   const [openItems, setOpenItems] = useState(false);
 
-  function removeSlash(str: string, index:  number) {
+  function removeSlash(str: string, index: number) {
     return str.split("/")[index];
   }
 
@@ -50,14 +50,14 @@ function NavItem({ title, subitem, index, url, icon }: NavItemProps) {
             }}>
             {icon}
           </div>
-          <h6
+          <h1
             className={` ${
               "/" + removeSlash(currentPath, 1) !== url
                 ? "text-gray-400"
                 : "text-[#6366F1]"
-            } text-[13px]  font-medium`}>
+            } text-[13px]  font-medium flex items-center justify-center`}>
             {t(title)}
-          </h6>
+          </h1>
         </div>
         <div>
           {subitem?.length &&

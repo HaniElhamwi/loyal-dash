@@ -71,7 +71,7 @@ function ProductRow({
   return (
     <>
       <TableRowStyles>
-        <TableCell>
+        <TableCell className="p-1">
           {openEditDialog && (
             <EditProductDialog
               setOpen={setOpenEditDialog}
@@ -89,7 +89,7 @@ function ProductRow({
         </TableCell>
         <TableCell>
           <img
-            className="w-[100px] rounded h-[100px] object-contain"
+            className="w-[100px] rounded h-[80px] object-contain"
             alt=""
             src={rowItem.image}
           />

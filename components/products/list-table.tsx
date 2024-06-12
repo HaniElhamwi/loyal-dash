@@ -51,7 +51,7 @@ function ListTable() {
 
   return (
     <div>
-      <Card className="mt-12" sx={{ background: "white", minWidth: 800 }}>
+      <Card className="mt-4" sx={{ background: "white", minWidth: 800 }}>
         <div className="py-5 px-3 flex flex-row gap-3">
           <SearchIcon sx={{ fontSize: 30, color: "#333" }} />
           <input
@@ -72,22 +72,22 @@ function ListTable() {
             <TableRow>
               <TableCellStyles></TableCellStyles>
               <TableCellStyles align="left" className="">
-                <h1 className="text-black font-bold">image</h1>
+                <h1 className="text-black font-medium">image</h1>
               </TableCellStyles>
               <TableCellStyles align="left">
-                <h1 className="text-black font-bold">title</h1>
+                <h1 className="text-black font-medium">title</h1>
               </TableCellStyles>
               <TableCellStyles align="left">
-                <h1 className="text-black font-bold">description</h1>
+                <h1 className="text-black font-medium">description</h1>
               </TableCellStyles>
               <TableCellStyles align="left">
-                <h1 className="text-black font-bold">price</h1>
+                <h1 className="text-black font-medium">price</h1>
               </TableCellStyles>
               <TableCellStyles align="left">
-                <h1 className="text-black font-bold">category</h1>
+                <h1 className="text-black font-medium">category</h1>
               </TableCellStyles>
               <TableCellStyles align="left">
-                <h1 className="text-black font-bold">action</h1>
+                <h1 className="text-black font-medium">action</h1>
               </TableCellStyles>
             </TableRow>
           </TableHead>

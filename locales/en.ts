@@ -1,5 +1,5 @@
 export const en = {
-  CONCEPTS: "Mahrouseh",
+  CONCEPTS: "LOYAL COMPANY",
   DASHBOARD: "Dashboard",
   PRODUCTS: "Products",
   LIST: "List",

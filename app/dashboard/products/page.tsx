@@ -11,13 +11,12 @@ import { useTranslation } from "react-i18next";
 function Page() {
   const { t } = useTranslation();
   return (
-    <Container className="mt-12">
+    <Container className="mt-6 max-h-[calc(100vh-100px)] overflow-y-auto">
       <Box
         sx={{
           display: "flex",
           flexDirection: "row",
           gap: 1,
-          paddingTop: 7,
           justifyContent: "space-between",
         }}>
         <div>

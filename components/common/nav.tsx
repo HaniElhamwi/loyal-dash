@@ -16,7 +16,7 @@ function Nav() {
           <img src="/images/logo.png" alt="" className="w-[100px] h-[100px]" />
         </div>
         <div className="mt-4">
-          <h5 className="text-md text-gray-400 font-medium ">
+          <h5 className="text-md text-white mb-5 text-center font-bold">
             {t("CONCEPTS")}
           </h5>
         </div>
