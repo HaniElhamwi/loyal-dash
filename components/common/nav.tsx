@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import NavItem from "./nav-item";
 import { navItems } from "@/utils/paths";
 import { Button } from "@mui/material";
+import RedeemIcon from '@mui/icons-material/Redeem';
 import useSignout from "@/hooks/useSignout";
 import LogoutIcon from "@mui/icons-material/Logout";
 
@@ -10,7 +11,7 @@ function Nav() {
   const { t } = useTranslation();
   const { signout } = useSignout();
   return (
-    <div className=" text-primary w-[300px] bg-primary min-h-screen py-12 px-5 flex justify-between flex-col">
+    <div className=" text-primary w-[230px] bg-primary min-h-screen py-12 px-2 flex justify-between flex-col">
       <div>
         <div className="text-center flex_center">
           <img src="/images/logo.png" alt="" className="w-[100px] h-[100px]" />

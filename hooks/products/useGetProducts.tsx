@@ -1,24 +1,39 @@
 import { db } from "@/firebase";
-import { collection, query, where, getDocs } from "firebase/firestore";
+import {
+  collection,
+  query,
+  where,
+  getDocs,
+  updateDoc,
+  doc,
+} from "firebase/firestore";
 import { useState } from "react";
 
-const useGetAllProducts = () => {
+const useGetAllGifts = () => {
   const [loading, setLoading] = useState(false);
-  const [products, setProducts] = useState([]);
+  const [gifts, setGifts] = useState([]);
   const [message, setMessage] = useState({
     message: "",
     status: "",
   });
-  const productsData: any = [];
-  const getAllProducts = async () => {
+  const getAllGifts = async (status: boolean) => {
+    const giftsData: any = [];
+
     try {
       setLoading(true);
-      const q = query(collection(db, "categories"));
+      const q = query(
+        collection(db, "gift"),
+        where("isDelivered", "==", status)
+      );
       const querySnapshot = await getDocs(q);
+
       querySnapshot.forEach((doc) => {
-        productsData.push(doc.data());
+        giftsData.push({
+          ...doc.data(),
+          id: doc.id,
+        });
       });
-      setProducts(productsData);
+      setGifts(giftsData);
       setLoading(false);
     } catch (err: any) {
       setMessage({
@@ -29,14 +44,27 @@ const useGetAllProducts = () => {
     }
   };
 
+  const toggleDelivered = async (
+    status: boolean,
+    id: string,
+    selectingStatus: boolean
+  ) => {
+    const docRef = doc(db, "gift", id);
+    await updateDoc(docRef, {
+      isDelivered: status,
+    });
+    getAllGifts(selectingStatus);
+  };
+
   return {
-    getAllProducts,
+    getAllGifts,
     loading,
     setMessage,
     message,
-    products,
-    setProducts,
+    gifts,
+    setGifts,
+    toggleDelivered,
   };
 };
 
-export default useGetAllProducts;
+export default useGetAllGifts;

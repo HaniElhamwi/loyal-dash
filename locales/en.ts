@@ -26,4 +26,5 @@ export const en = {
   LOWER_BANNER: "Lower Banner",
   UPPER_BANNER: "Upper Banner",
   PRICE: "price",
+  GIFTS: "Gifts",
 };

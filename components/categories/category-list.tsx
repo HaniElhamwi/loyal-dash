@@ -93,7 +93,9 @@ function CategoryList() {
 
   return (
     <div>
-      <Card className="mt-12" sx={{ background: "white", minWidth: 800 }}>
+      <Card
+        className="mt-12"
+        sx={{ background: "white", maxWidth: 800, overflow: "scroll" }}>
         {" "}
         {!loading ? (
           <div>
@@ -104,10 +106,7 @@ function CategoryList() {
                 className="text-black outline-none	 w-full"
               />
             </div>
-            <Table
-              sx={{
-                minWidth: 800,
-              }}>
+            <Table sx={{}}>
               <TableHead>
                 <TableRow>
                   <TableCellStyles align="center">image</TableCellStyles>

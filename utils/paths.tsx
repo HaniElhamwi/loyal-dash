@@ -1,6 +1,6 @@
-import HomeIcon from "@mui/icons-material/Home";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import GroupIcon from "@mui/icons-material/Group";
+import RedeemIcon from "@mui/icons-material/Redeem";
 import CategoryIcon from "@mui/icons-material/Category";
 
 export const navItems = [
@@ -73,6 +73,17 @@ export const navItems = [
         url: "/dashboard/category/create",
       },
     ],
+  },
+  {
+    title: "GIFT",
+    url: "/dashboard/gift",
+    icon: (
+      <RedeemIcon
+        className="text-gray-400 text-[24px]"
+        style={{ color: "inherit" }}
+      />
+    ),
+    id: 4,
   },
   {
     title: "USERS",

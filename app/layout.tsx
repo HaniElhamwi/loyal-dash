@@ -35,7 +35,9 @@ export default function RootLayout({
               theme="dark"
             />
             <AuthHandler>
-              <div className="flex flex-row">{children}</div>
+              <div className="flex flex-row max-w-screen overflow-hidden">
+                {children}
+              </div>
             </AuthHandler>
           </ThemeProvider>
         </I18nextProvider>

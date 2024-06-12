@@ -33,7 +33,7 @@ function NavItem({ title, subitem, index, url, icon }: NavItemProps) {
   return (
     <div>
       <div
-        className="flex justify-between items-center cursor-pointer hover:bg-[#ffffff0a] py-1 px-3 rounded select-none"
+        className="flex justify-between items-center cursor-pointer hover:bg-[#ffffff0a] py-1 px-1 rounded select-none"
         onClick={() => {
           setOpenItems(!openItems);
           if (!subitem?.length && url) {
