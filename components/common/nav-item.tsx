@@ -27,13 +27,13 @@ function NavItem({ title, subitem, index, url, icon }: NavItemProps) {
   const [openItems, setOpenItems] = useState(false);
 
   function removeSlash(str: string, index: number) {
-    return str.split("/")[index];
+    return str.split("/")[index] + "/" + str.split("/")[2];
   }
 
   return (
     <div>
       <div
-        className="flex justify-between items-center cursor-pointer hover:bg-[#ffffff0a] py-1 px-1 rounded select-none"
+        className="flex transition-all justify-between items-center cursor-pointer hover:bg-[#ffffff0a] py-1 px-1 rounded select-none"
         onClick={() => {
           setOpenItems(!openItems);
           if (!subitem?.length && url) {
@@ -69,13 +69,13 @@ function NavItem({ title, subitem, index, url, icon }: NavItemProps) {
         </div>
       </div>
       {subitem?.length &&
-        !openItems &&
+        openItems &&
         subitem.map((item) => {
           return (
             <Link
               href={item.url}
               key={item.id}
-              className="flex justify-between items-center cursor-pointer hover:bg-[#ffffff0a] py-1 px-3 rounded select-none">
+              className="transition-all flex justify-between items-center cursor-pointer hover:bg-[#ffffff0a] py-1 px-3 rounded select-none">
               <div className="flex gap-9 items-center">
                 <div></div>
                 <h6
